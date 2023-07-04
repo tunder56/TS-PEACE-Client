@@ -34,19 +34,19 @@ namespace TS_PEACE_Client.Windows.Game_windows
         TimeSpan Attak4_timerVar;
 
         // colour variables
-        public SolidColorBrush Disabledfill = Brushes.Red;
-        public SolidColorBrush Disabledfilltext = Brushes.Red;
-        public SolidColorBrush Activefill = Brushes.Green;
-        public SolidColorBrush ActivefillSelected = Brushes.YellowGreen;
-        public SolidColorBrush ActivefillSelectedBox = Brushes.YellowGreen;
-        public SolidColorBrush TargetedBorder = Brushes.LightPink;
-        public SolidColorBrush Untargeted = Brushes.Black;
-        public SolidColorBrush Attack1Hitfill = Brushes.Turquoise;
-        public SolidColorBrush Attack2Hitfill = Brushes.PapayaWhip;
-        public SolidColorBrush Attack3Hitfill = Brushes.Cornsilk;
-        public SolidColorBrush Attack4Hitfill = Brushes.BlanchedAlmond;
-        public SolidColorBrush OwnLand = Brushes.Blue;
-        public SolidColorBrush Elseland = Brushes.Violet;
+        SolidColorBrush Disabledfill = new SolidColorBrush();
+        SolidColorBrush Disabledfilltext = new SolidColorBrush();
+        SolidColorBrush Activefill = new SolidColorBrush();
+        SolidColorBrush ActivefillSelected = new SolidColorBrush();
+        SolidColorBrush ActivefillSelectedBox = new SolidColorBrush();
+        SolidColorBrush TargetedBorder = new SolidColorBrush();
+        SolidColorBrush Untargeted = new SolidColorBrush();
+        SolidColorBrush Attack1Hitfill = new SolidColorBrush();
+        SolidColorBrush Attack2Hitfill = new SolidColorBrush();
+        SolidColorBrush Attack3Hitfill = new SolidColorBrush();
+        SolidColorBrush Attack4Hitfill = new SolidColorBrush();
+        SolidColorBrush OwnLand = new SolidColorBrush();
+        SolidColorBrush Elseland = new SolidColorBrush();
 
 
 
@@ -78,6 +78,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
             public string owner;
         }
 
+        public static readonly RoutedEvent Clickteam = EventManager.RegisterRoutedEvent(
+        name: "Click",
+        routingStrategy: RoutingStrategy.Bubble,
+        handlerType: typeof(RoutedEventHandler),
+        ownerType: typeof(Button));
 
         List<city> citylist = new List<city>();
 
@@ -108,7 +113,9 @@ namespace TS_PEACE_Client.Windows.Game_windows
         {
             Timersetup();
             setuparray();
+            Screenstatesetup();
             Setuptooltips();
+            Coloursetup();
         }
 
         public void setuparray()
@@ -164,6 +171,35 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         }
 
+        private void Screenstatesetup()
+        {
+            // Apply Fills to elements
+
+            Attack1_box.Fill = Disabledfill;
+            Attack2_box.Fill = Disabledfill;
+            Attack3_box.Fill = Disabledfill;
+            Attack4_box.Fill = Disabledfill;
+        }
+
+        private void Coloursetup()
+        {
+            // Modify Global Colours
+            Disabledfill.Color = Color.FromArgb(100, 177, 0, 0);
+            Disabledfill.Opacity = 20;
+            Disabledfilltext.Color = Colors.White;
+            Activefill.Color = Color.FromArgb(50, 0, 190, 0);
+            Activefill.Opacity = 5;
+            ActivefillSelected.Color = Color.FromArgb(255, 0, 190, 0);
+            ActivefillSelectedBox.Color = Color.FromArgb(100, 255, 255, 255);
+            TargetedBorder.Color = Color.FromArgb(80, 255, 178, 178);
+            Untargeted.Color = Color.FromArgb(0, 0, 0, 0);
+            Attack1Hitfill.Color = Color.FromArgb(80, 116, 0, 129);
+            Attack2Hitfill.Color = Color.FromArgb(77, 1, 139, 0);
+            Attack3Hitfill.Color = Color.FromArgb(77, 141, 95, 0);
+            Attack4Hitfill.Color = Color.FromArgb(77, 161, 184, 14);
+            OwnLand = new SolidColorBrush(Color.FromRgb(90, 105, 236));
+            Elseland = new SolidColorBrush(Color.FromRgb(215, 94, 67));
+        }
 
         private void Timersetup()
         {
@@ -616,6 +652,52 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         }
 
+        private void TeamSet_Button1_Click(object sender, RoutedEventArgs e)
+        {
+            // apply team 1 to user state when clicked and remove slection screen
+
+            teamSet_background.Opacity = 0;
+            TeamSet_Button1.Opacity = 0;
+            TeamSet_Button2.Opacity = 0;
+            TeamSet_Label.Opacity = 0;
+            TeamSet_Button1.IsEnabled = false;
+            TeamSet_Button2.IsEnabled = false;
+            Panel.SetZIndex(teamSet_background, 0);
+            Panel.SetZIndex(TeamSet_Button1, 0);
+            Panel.SetZIndex(TeamSet_Button2, 0);
+            Panel.SetZIndex(TeamSet_Label, 0);
+
+            message_textbox.Text = "Team:Team1";
+            RoutedEventArgs routedEventArgs = new(routedEvent: Clickteam);
+            RaiseEvent(routedEventArgs);
+
+            messagesend_button_Click(messagesend_button, routedEventArgs);
+
+
+        }
+
+        private void TeamSet_Button2_Click(object sender, RoutedEventArgs e)
+        {
+            // apply team 2 to user state when clicked and remove slection screen
+
+            teamSet_background.Opacity = 0;
+            TeamSet_Button1.Opacity = 0;
+            TeamSet_Button2.Opacity = 0;
+            TeamSet_Label.Opacity = 0;
+            TeamSet_Button1.IsEnabled = false;
+            TeamSet_Button2.IsEnabled = false;
+            Panel.SetZIndex(teamSet_background, 0);
+            Panel.SetZIndex(TeamSet_Button1, 0);
+            Panel.SetZIndex(TeamSet_Button2, 0);
+            Panel.SetZIndex(TeamSet_Label, 0);
+
+            message_textbox.Text = "Team:Team2";
+            RoutedEventArgs routedEventArgs = new(routedEvent: Clickteam);
+            RaiseEvent(routedEventArgs);
+
+            messagesend_button_Click(messagesend_button, routedEventArgs);
+        }
+
         // Recival Methods
         private async void reciveMessage(string user, string message)
         {
@@ -672,7 +754,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             toinsert.Foreground = Elseland;
                         }
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.text = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
