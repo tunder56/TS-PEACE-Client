@@ -7,6 +7,73 @@
         mc:Ignorable="d"
         Title="Settingswindow" Height="450" Width="800">
     <Grid>
-        
+        <Rectangle HorizontalAlignment="Center" Height="450" Stroke="White" VerticalAlignment="Center" Width="798" Fill="#FF9B6161"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="739,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="5.479,0.277" />
+        <Button Content="Save and apply&#xD;&#xA;" HorizontalAlignment="Left" Margin="623,404,0,0" VerticalAlignment="Top" Height="22"/>
+        <Slider  HorizontalAlignment="Left" Height="22" Margin="229,164,0,0" VerticalAlignment="Top" Width="325"/>
+        <Label Content="Master volume&#xD;&#xA;" HorizontalAlignment="Left" Margin="140,157,0,0" VerticalAlignment="Top" Height="29"/>
+        <Slider HorizontalAlignment="Left" Height="22" Margin="229,203,0,0" VerticalAlignment="Top" Width="325"/>
+        <Label Content="SFX&#xD;&#xA;" HorizontalAlignment="Left" Margin="163,199,0,0" VerticalAlignment="Top"/>
+        <Label Content="Resolution&#xD;&#xA;" HorizontalAlignment="Left" Margin="310,241,0,0" VerticalAlignment="Top"/>
+        <Label Content="Basic settings&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.255,0.418"/>
+        <ComboBox HorizontalAlignment="Left" Margin="199,344,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.434"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Label Content="TImers&#xD;&#xA;" HorizontalAlignment="Left" Margin="345,288,0,0" VerticalAlignment="Top"/>
+        <Label Content="Attack 1 timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="108,338,0,0" VerticalAlignment="Top" Height="29"/>
+        <ComboBox HorizontalAlignment="Left" Margin="334,344,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.434"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Label Content="Attack2 timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="250,338,0,0" VerticalAlignment="Top" Height="29"/>
+        <ComboBox HorizontalAlignment="Left" Margin="482,344,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.434"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Label Content="Attack 3 Timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="392,339,0,0" VerticalAlignment="Top" Height="27"/>
+        <ComboBox HorizontalAlignment="Left" Margin="627,343,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.434"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Label Content="Attack 4  timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="535,339,0,0" VerticalAlignment="Top" Height="28"/>
+        <Button Content="Adavanced settings" HorizontalAlignment="Left" Margin="32,396,0,0" VerticalAlignment="Top" Height="37" Width="116"/>
+        <ComboBox HorizontalAlignment="Left" Margin="393,249,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.434"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="568,160,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="568,196,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

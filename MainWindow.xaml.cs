@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TS_PEACE_Client.Windows.Game_windows;
+using TS_PEACE_Client.Windows.Settings_windows;
+using TS_PEACE_Client.Windows.Tutorial_windows;
 
 namespace TS_PEACE_Client
 {
@@ -40,7 +43,9 @@ namespace TS_PEACE_Client
 
         private void Settings(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Settingswindow win = new Settingswindow();
+            win.Show();
+            this.Close();
         }
 
         private void Modportal(object sender, RoutedEventArgs e)
@@ -50,7 +55,9 @@ namespace TS_PEACE_Client
 
         private void Tutorial(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException(); ;
+            Tutorialpart1 win = new Tutorialpart1();
+            win.Show();
+            this.Close();
         }
     }
 }
