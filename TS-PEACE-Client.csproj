@@ -8,4 +8,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Windows\Settings windows\" />
+    <Folder Include="Windows\Tutorial windows\" />
+  </ItemGroup>
+
 </Project>
