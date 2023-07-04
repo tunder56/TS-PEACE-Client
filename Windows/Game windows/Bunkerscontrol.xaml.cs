@@ -15,6 +15,7 @@ using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Xsl;
@@ -753,6 +754,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         {
                             toinsert.Foreground = Elseland;
                         }
+                        animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
                         toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
@@ -785,6 +787,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         {
                             toinsert.Foreground = Elseland;
                         }
+                        animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
                         toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
@@ -817,10 +820,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         {
                             toinsert.Foreground = Elseland;
                         }
-                        
+                        animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                       
-
                         toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
@@ -852,6 +853,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         {
                             toinsert.Foreground = Elseland;
                         }
+                        animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
                         toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
@@ -946,5 +948,350 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 textBox.Text = "";
             }
         }
+
+        // animation methods
+
+        private void animateattack(string attacker, string hitcityin, int attacknum)
+        {
+
+            List<city> randomcity = new List<city>();
+            randomcity.AddRange(citylist.Where(x => x.owner == attacker));
+
+            Random random = new Random();
+
+
+            city Hitcity = citylist.Find(x => x.name == hitcityin);
+
+
+            var cityfound = randomcity[random.Next(randomcity.Count)];
+
+
+
+            bool movingLtoRight = false;
+            bool movingUtoDown = false;
+            bool movingDtoUP = false;
+            bool movingRtoLeft = false;
+
+
+            double x1 = cityfound.x;
+            double y1 = cityfound.y;
+            double x2 = Hitcity.x;
+            double y2 = Hitcity.y;
+
+            double xmod = 0;
+
+            double ymod = 0;
+
+            double boxcorrection = 20;
+
+            double xdif = Math.Abs(x1 - x2);
+            double ydif = Math.Abs(y1 - y2);
+
+            double midpointx = (x1 + x2) / 2;
+            double midpointy = (y1 + y2) / 2;
+
+            RectangleGeometry Clippingmask = new RectangleGeometry();
+            Clippingmask.Rect = new Rect(0, 0, 150, 160);
+
+
+
+            DropShadowEffect dropShadow = new DropShadowEffect();
+            dropShadow.Color = Color.FromRgb(100, 100, 100);
+            dropShadow.BlurRadius = 2;
+
+
+
+            Rectangle rectangle = new Rectangle();
+
+            rectangle.Width = 50;
+            rectangle.Height = 50;
+
+            rectangle.Stroke = Brushes.Blue;
+
+
+            Path path = new Path();
+            path.Stroke = Brushes.Black;
+            path.StrokeDashArray = new DoubleCollection(new double[] { 2, 2 });
+            path.StrokeThickness = 4;
+
+            path.Effect = dropShadow;
+
+            Path path2 = new Path();
+            path2.Stroke = Brushes.Blue;
+
+            path2.StrokeThickness = 4;
+
+            if (attacker == Selfuser)
+            {
+                path.Stroke = OwnLand;
+            }
+            else
+            {
+                path.Stroke = Elseland;
+            }
+            path.StrokeDashCap = PenLineCap.Round;
+            path.StrokeEndLineCap = PenLineCap.Round;
+            PathGeometry pathGeometry = new PathGeometry();
+
+            PathFigure pathFigure = new PathFigure();
+
+            PathGeometry Animationpath = new PathGeometry();
+
+            PathFigure pathFigure2 = new PathFigure();
+            pathFigure.StartPoint = new Point(x1 + 5, y1 + 5);
+
+            if (xdif > ydif)
+            {
+                if (x1 > x2)
+                {
+                    movingRtoLeft = true;
+                }
+                else if (x2 > x1)
+                {
+                    movingLtoRight = true;
+                }
+
+
+                double ymidpointinsurt = 0;
+                if (midpointy - 100 < 0)
+                {
+                    ymidpointinsurt = 20;
+
+                }
+                else
+                {
+                    ymidpointinsurt = midpointy - 100;
+                }
+
+
+                if (movingLtoRight)
+                {
+                    pathFigure.Segments.Add(new QuadraticBezierSegment(new Point(midpointx, ymidpointinsurt), new Point(x2 + 5, y2 + 5), true));
+
+                    pathFigure2.StartPoint = new Point(x1, y1 - 60);
+
+                    pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2 - 60), true));
+                }
+                else if (movingRtoLeft)
+                {
+                    pathFigure.Segments.Add(new QuadraticBezierSegment(new Point(midpointx, ymidpointinsurt), new Point(x2 + 5, y2 + 5), true));
+
+                    pathFigure2.StartPoint = new Point(x1, y1 + 10);
+
+                    pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2 + 10), true));
+                }
+                else
+                {
+                    pathFigure.Segments.Add(new QuadraticBezierSegment(new Point(midpointx, ymidpointinsurt), new Point(x2 + 5, y2 + 5), true));
+
+                    pathFigure2.StartPoint = new Point(x1, y1 + 10);
+
+                    pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2 + 10), true));
+                }
+
+
+
+
+
+            }
+            else if (ydif > xdif)
+            {
+                double xmidpointinsurt = 0;
+                if (midpointx - 100 < 0)
+                {
+                    xmidpointinsurt = 20;
+
+                }
+                else
+                {
+                    xmidpointinsurt = midpointx - 100;
+                }
+
+                if (y1 > y2)
+                {
+                    movingDtoUP = true;
+                }
+                if (y2 > y1)
+                {
+                    movingUtoDown = true;
+                }
+
+
+                if (movingUtoDown)
+                {
+                    pathFigure.Segments.Add(new QuadraticBezierSegment(new Point(xmidpointinsurt, midpointy), new Point(x2 + 5, y2 + 5), true));
+
+                    pathFigure2.StartPoint = new Point(x1, y1);
+
+                    pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2), true));
+                }
+                else if (movingDtoUP)
+                {
+                    pathFigure.Segments.Add(new QuadraticBezierSegment(new Point(xmidpointinsurt, midpointy), new Point(x2 + 5, y2 + 5), true));
+
+                    pathFigure2.StartPoint = new Point(x1 - 100, y1);
+
+                    pathFigure2.Segments.Add(new LineSegment(new Point(x2 - 100, y2), true));
+                }
+                else
+                {
+                    pathFigure.Segments.Add(new QuadraticBezierSegment(new Point(xmidpointinsurt, midpointy), new Point(x2 + 5, y2 + 5), true));
+
+                    pathFigure2.StartPoint = new Point(x1, y1);
+
+                    pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2), true));
+                }
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            pathGeometry.Figures.Add(pathFigure);
+
+            path.Data = pathGeometry;
+
+            Animationpath.Figures.Add(pathFigure2);
+            path2.Data = Animationpath;
+
+
+            RotateTransform animatedRotateTransform =
+             new RotateTransform();
+            TranslateTransform animatedTranslateTransform =
+                new TranslateTransform();
+
+            string rotateTransformName = "AnimatedRotateTransform" + attacknum;
+            string translateTransformname = "AnimatedTranslateTransform" + attacknum;
+            string clippingmaskname = "cliipingmask" + attacknum;
+
+            this.RegisterName(rotateTransformName, animatedRotateTransform);
+            this.RegisterName(translateTransformname, animatedTranslateTransform);
+            this.RegisterName(clippingmaskname, Clippingmask);
+
+
+            TransformGroup tGroup = new TransformGroup();
+            tGroup.Children.Add(animatedRotateTransform);
+            tGroup.Children.Add(animatedTranslateTransform);
+
+            Clippingmask.Transform = tGroup;
+
+            rectangle.RenderTransform = tGroup;
+
+            PathGeometry animationpath = Animationpath;
+
+
+            DoubleAnimationUsingPath angleAnimation = new DoubleAnimationUsingPath();
+            angleAnimation.PathGeometry = animationpath;
+            angleAnimation.Duration = TimeSpan.FromSeconds(3);
+            angleAnimation.Source = PathAnimationSource.Angle;
+
+            // Set the animation to target the Angle property
+            // of the RotateTransform named "AnimatedRotateTransform".
+            Storyboard.SetTargetName(angleAnimation, rotateTransformName);
+            Storyboard.SetTargetProperty(angleAnimation, new PropertyPath(RotateTransform.AngleProperty));
+
+
+            DoubleAnimationUsingPath translateXAnimation =
+                new DoubleAnimationUsingPath();
+            translateXAnimation.PathGeometry = animationpath;
+            translateXAnimation.Duration = TimeSpan.FromSeconds(3);
+
+            translateXAnimation.Source = PathAnimationSource.X;
+
+
+            Storyboard.SetTargetName(translateXAnimation, translateTransformname);
+            Storyboard.SetTargetProperty(translateXAnimation,
+                new PropertyPath(TranslateTransform.XProperty));
+
+            DoubleAnimationUsingPath translateYAnimation =
+                new DoubleAnimationUsingPath();
+            translateYAnimation.PathGeometry = animationpath;
+            translateYAnimation.Duration = TimeSpan.FromSeconds(3);
+
+
+
+            translateYAnimation.Source = PathAnimationSource.Y;
+
+            Storyboard.SetTargetName(translateYAnimation, translateTransformname);
+            Storyboard.SetTargetProperty(translateYAnimation,
+                new PropertyPath(TranslateTransform.YProperty));
+
+
+
+            Storyboard pathAnimationStoryboard = new Storyboard();
+
+
+
+            RectAnimation rectAnimation = new RectAnimation();
+            rectAnimation.From = new Rect(0, 0, 0, 160);
+            rectAnimation.To = new Rect(0, 0, 150, 160);
+            rectAnimation.Duration = TimeSpan.FromSeconds(2);
+
+            RectAnimation closing = new RectAnimation();
+            closing.From = new Rect(0, 0, 150, 160);
+            closing.To = new Rect(0, 0, 0, 160);
+            closing.Duration = TimeSpan.FromSeconds(5);
+
+            Storyboard.SetTargetName(rectAnimation, clippingmaskname);
+            Storyboard.SetTargetProperty(rectAnimation, new PropertyPath(RectangleGeometry.RectProperty));
+
+            Storyboard.SetTargetName(closing, clippingmaskname);
+            Storyboard.SetTargetProperty(closing, new PropertyPath(RectangleGeometry.RectProperty));
+
+            pathAnimationStoryboard.Children.Add(angleAnimation);
+            pathAnimationStoryboard.Children.Add(translateXAnimation);
+            pathAnimationStoryboard.Children.Add(translateYAnimation);
+            pathAnimationStoryboard.Children.Add(rectAnimation);
+
+            Storyboard closingtime = new Storyboard();
+
+
+            closingtime.Children.Add(closing);
+
+
+            path.Clip = Clippingmask;
+            map.Children.Add(path);
+            //map.Children.Add(rectangle);
+            //map.Children.Add(path2);
+
+
+            path.Loaded += delegate (object sender, RoutedEventArgs e)
+            {
+                // Start the storyboard.
+                pathAnimationStoryboard.Begin(this);
+            };
+
+
+            pathAnimationStoryboard.Completed += (s, e) =>
+            {
+                map.Children.Remove(path);
+                closingtime.Begin(this);
+                UnregisterName(rotateTransformName);
+                UnregisterName(clippingmaskname);
+                UnregisterName(translateTransformname);
+            };
+
+
+
+
+
+
+        }
+
+
     }
 }
