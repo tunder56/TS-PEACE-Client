@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TS_PEACE_Client.Windows.Game_windows;
 
 namespace TS_PEACE_Client
 {
@@ -23,6 +24,33 @@ namespace TS_PEACE_Client
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Bunkers(object sender, RoutedEventArgs e)
+        {
+            Bunkerscontrol win = new Bunkerscontrol();
+            win.Show();
+            this.Close();
+        }
+
+        private void RandomBunkers(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Settings(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Modportal(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Tutorial(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException(); ;
         }
     }
 }
