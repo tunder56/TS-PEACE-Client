@@ -662,7 +662,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                     this.Dispatcher.Invoke(() =>
                     {
-                        Label toinsert = new Label();
+                        TextBlock toinsert = new TextBlock();
                         if (Attacker == Selfuser)
                         {
                             toinsert.Foreground = OwnLand;
@@ -671,8 +671,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         {
                             toinsert.Foreground = Elseland;
                         }
-                        
-                        toinsert.Content = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.TextWrapping = TextWrapping.Wrap;
+                        toinsert.text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -694,7 +694,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                     this.Dispatcher.Invoke(() =>
                     {
-                        Label toinsert = new Label();
+                        TextBlock toinsert = new TextBlock();
                         if (Attacker == Selfuser)
                         {
                             toinsert.Foreground = OwnLand;
@@ -703,8 +703,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         {
                             toinsert.Foreground = Elseland;
                         }
-                        
-                        toinsert.Content = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.TextWrapping = TextWrapping.Wrap;
+                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -726,7 +726,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                     this.Dispatcher.Invoke(() =>
                     {
-                        Label toinsert = new Label();
+                        TextBlock toinsert = new TextBlock();
                         if (Attacker == Selfuser)
                         {
                             toinsert.Foreground = OwnLand;
@@ -736,7 +736,10 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             toinsert.Foreground = Elseland;
                         }
                         
-                        toinsert.Content = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.TextWrapping = TextWrapping.Wrap;
+                       
+
+                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -758,7 +761,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                     this.Dispatcher.Invoke(() =>
                     {
-                        Label toinsert = new Label();
+                        TextBlock toinsert = new TextBlock();
                         if (Attacker == Selfuser)
                         {
                             toinsert.Foreground = OwnLand;
@@ -767,8 +770,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         {
                             toinsert.Foreground = Elseland;
                         }
-                        
-                        toinsert.Content = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.TextWrapping = TextWrapping.Wrap;
+                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
