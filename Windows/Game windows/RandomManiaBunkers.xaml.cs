@@ -1381,6 +1381,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
             RotateTransform animatedRotateTransform = new RotateTransform();
             TranslateTransform animatedTranslateTransform = new TranslateTransform();
 
+            if(attacker != Selfuser)
+            {
+                attacknum = attacknum + 1000;
+            }
+
             string rotateTransformName = "AnimatedRotateTransform" + attacknum;
             string translateTransformname = "AnimatedTranslateTransform" + attacknum;
             string clippingmaskname = "cliipingmask" + attacknum;
