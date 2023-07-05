@@ -4,9 +4,145 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TS_PEACE_Client.Windows.Game_windows"
-        mc:Ignorable="d"
-        Title="RandomManiaBunkers" Height="450" Width="800">
-    <Grid>
-        
+         mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStyle="None"
+        Title="RandomManiaBunkers" Height="1080" Width="1920">
+    <Grid x:Name="main_grid" Background="#FF373737">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180*"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="119*"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Name="teamSet_background" Grid.ColumnSpan="3" Grid.RowSpan="4" Fill="Black" Opacity="0.775" Panel.ZIndex="2"></Rectangle>
+
+        <Label Name="TeamSet_Label" Content="Select Your Team" Foreground="White" FontSize="100" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="3" FontFamily="Avara" ></Label>
+
+        <Button x:Name="TeamSet_Button1" Grid.Row="1" FontSize="80" Margin="140,0,0,0" Grid.Column="0" Click="TeamSet_Button1_Click" Panel.ZIndex="3" FontFamily="AUTHENTIC Sans 60">Team 1</Button>
+        <Button Name="TeamSet_Button2" Grid.Row="1" Grid.Column="2" FontSize="80" Margin="0,0,140,0" Panel.ZIndex="3" FontFamily="AUTHENTIC Sans 60" Click="TeamSet_Button2_Click">Team 2</Button>
+
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Stroke="Black" />
+        <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"  >
+            <Canvas x:Name="map" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  Canvas.Left="0" Canvas.Top="0" HorizontalAlignment="Center" Width="983.6" Height="708.7" Panel.ZIndex="1" >
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+        </Viewbox>
+        <Grid x:Name="targeting_grid" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Content="Targeting" HorizontalContentAlignment="Center" FontSize="36" Foreground="White" Grid.Row="0" Margin="0,0,0,5" FontWeight="Bold" Panel.ZIndex="1" FontFamily="Avara"/>
+            <ListBox x:Name="Targeting_list_display" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="36" HorizontalContentAlignment="Center" Background="{x:Null}" Foreground="White" BorderBrush="Black" Panel.ZIndex="1" FontFamily="AUTHENTIC Sans 90"/>
+            <Rectangle   Grid.Row="0" Grid.RowSpan="2" Stroke="Black"  />
+
+        </Grid>
+        <Grid x:Name="attak_grid" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="221*"></ColumnDefinition>
+                <ColumnDefinition Width="195*"></ColumnDefinition>
+                <ColumnDefinition Width="224*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="Attack1_timer" Grid.Row="0" TextWrapping="Wrap" Text="00:00:00" Foreground="White" TextAlignment="Center"   FontSize="30" Margin="11,22,0,10" Grid.Column="1" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 90"  />
+            <TextBlock x:Name="Attack2_timer" Grid.Row="1" TextWrapping="Wrap" Text="00:00:00" Foreground="White" TextAlignment="Center"   FontSize="30" Margin="11,22,0,10" Grid.Column="1" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 90" />
+            <TextBlock x:Name="Attack3_timer" Grid.Row="2" TextWrapping="Wrap" Text="00:00:00" Foreground="White" TextAlignment="Center"   FontSize="30" Margin="11,22,0,10" Grid.Column="1" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 90" />
+            <TextBlock x:Name="Attack4_timer" Grid.Row="3" TextWrapping="Wrap" Text="00:00:00" Foreground="White" TextAlignment="Center"   FontSize="30" Margin="11,22,0,10" Grid.Column="1" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 90" />
+
+            <Rectangle x:Name="Attack_border"   Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" Stroke="Black"  Panel.ZIndex="0" />
+            <Rectangle x:Name="Attack1_box"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black" Panel.ZIndex="0"   >
+            </Rectangle>
+            <TextBlock x:Name="Attack1_name" Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" Text="Attack 1" Foreground="White" TextAlignment="Center"   FontSize="36" Margin="0,22,18,88" Grid.RowSpan="2" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 60" />
+            <Rectangle x:Name="Attack2_box"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black" Panel.ZIndex="0"  />
+            <TextBlock x:Name="Attack2_name" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" Text="Attack 2" Foreground="White" TextAlignment="Center"   FontSize="36" Margin="0,22,18,88" Grid.RowSpan="2" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 60" />
+            <Rectangle x:Name="Attack3_box"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black"  Panel.ZIndex="0" />
+            <TextBlock x:Name="Attack3_name" Grid.Column="0" Grid.Row="2" TextWrapping="Wrap" Text="Attack 3" Foreground="White" TextAlignment="Center"   FontSize="36" Margin="0,22,18,88" Grid.RowSpan="2" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 60" />
+            <Rectangle x:Name="Attack4_box"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black" Panel.ZIndex="0"  />
+            <TextBlock x:Name="Attack4_name" Grid.Column="0" Grid.Row="3" TextWrapping="Wrap" Text="Attack 4"  Foreground="White" TextAlignment="Center"   FontSize="36" Margin="0,20,18,16" Panel.ZIndex="0" FontFamily="AUTHENTIC Sans 60" />
+
+
+
+            <Button x:Name="Attack1_button"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0"  Click="AttackMode_button_Click" Panel.ZIndex="1" />
+
+            <Button x:Name="Attack2_button"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0"  Click="AttackMode_button_Click" Panel.ZIndex="1" />
+
+            <Button x:Name="Attack3_button"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0"  Click="AttackMode_button_Click" Panel.ZIndex="1" />
+
+            <Button x:Name="Attack4_button"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0"  Click="AttackMode_button_Click" Panel.ZIndex="1" />
+
+
+
+
+            <Button x:Name="sendattack_button" Grid.Column="2" Content="Attack" Grid.Row="0" Margin="24,52,40,10" Grid.RowSpan="3" Background="{x:Null}" Foreground="White" FontSize="25" BorderBrush="Black" Click="Send_attack" Panel.ZIndex="1" FontFamily="Avara Black"/>
+        </Grid>
+        <Grid x:Name="message_grid" Grid.Column="2" Grid.Row="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="0.25*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle x:Name="message_box" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3"  Stroke="Black"></Rectangle>
+
+            <Label Name="message_title" Content="Messages" HorizontalContentAlignment="Center" FontSize="36" Foreground="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5" FontWeight="Bold" FontFamily="Avara" />
+            <Button x:Name="Syncmapbutton" Content="Sync" Width="150" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" FontSize="30" FontFamily="avara" Click="Syncmapbutton_Click" ></Button>
+            <Button x:Name="Exitbutton" Content="Exit"  Grid.Column="1" Grid.Row="0" FontSize="30" FontFamily="avara" Click="Exitbutton_Click" ></Button>
+            <TextBox x:Name="message_textbox" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Enter your text here..."  FontSize="36"  KeyDown="entercheck" GotFocus="messegge_textbox_focus" LostFocus="message_textbox_LostFocus" Panel.ZIndex="1" FontFamily="AUTHENTIC Sans 60"/>
+            <Button x:Name="messagesend_button" Grid.Column="1" Content="Send"   Grid.Row="2"  FontSize="30" FontWeight="Bold" Click="messagesend_button_Click" Panel.ZIndex="1" FontFamily="Avara Black"/>
+            <ListBox x:Name="messagedisplay_box" Grid.ColumnSpan="2" Grid.Row="1" HorizontalContentAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="AUTHENTIC Sans 90" >
+                <!--<ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock
+                    Text="{Binding}"
+                    TextWrapping="Wrap"
+
+                    />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>-->
+            </ListBox>
+
+
+
+
+        </Grid>
+
+        <Grid x:Name="strikefeed_grid" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Rectangle x:Name="strikefeed_box" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3"  Stroke="Black"></Rectangle>
+            <Label x:Name="stikefeed_title" Content="Strike Feed" HorizontalContentAlignment="Center" FontSize="36" Foreground="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5" FontWeight="Bold" FontFamily="Avara" />
+            <ListBox x:Name="stikefeeddisplay_box" Grid.ColumnSpan="2" Grid.Row="1" HorizontalContentAlignment="Center"   d:ItemsSource="{d:SampleData ItemCount=5}" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="Black" FontFamily="AUTHENTIC Sans 90" />
+
+
+        </Grid>
+
+
+
     </Grid>
 </Window>
