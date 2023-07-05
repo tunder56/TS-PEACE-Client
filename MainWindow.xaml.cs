@@ -38,7 +38,9 @@ namespace TS_PEACE_Client
 
         private void RandomBunkers(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            RandomManiaBunkers win = new RandomManiaBunkers();
+            win.Show();
+            this.Close();
         }
 
         private void Settings(object sender, RoutedEventArgs e)
