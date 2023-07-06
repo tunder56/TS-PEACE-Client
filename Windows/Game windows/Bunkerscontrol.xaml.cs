@@ -102,11 +102,12 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 .Build();
 
 
-
+            connection.HandshakeTimeout = TimeSpan.FromSeconds(10);
             connection.On<string, string>(methodName: "reciveMessage", (user, message) => reciveMessage(user, message));
             connection.On<List<string>, string, string>(methodName: "incommingattack", (incomAttack, Attacker, Method) => incommingattack(incomAttack, Attacker, Method));
             connection.StartAsync();
-
+            
+            
 
         }
 

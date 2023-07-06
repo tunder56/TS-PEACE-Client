@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TS_PEACE_Client.Windows.Game_windows
 {
@@ -153,14 +156,9 @@ namespace TS_PEACE_Client.Windows.Game_windows
             Reboottimer();
             bannedletters = bannedlettersS.ToCharArray();
 
-
+            IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
             pickingTeam1points();
-            pickingTeam2points();
-
-
-
-
-
+            Task.Run(() => pickingTeam2points(hex));
 
 
             booted = true;
@@ -188,7 +186,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
             connection.On<string>(methodName: "Syncmap2", (Citysync) => Syncmap2(Citysync));
             connection.On<string>(methodName: "Syncmap3", (Citysync) => Syncmap3(Citysync));
             connection.On<string>(methodName: "Syncmap4", (Citysync) => Syncmap4(Citysync));
-            connection.StartAsync();
+            connection.On(methodName: "Syncrequest", () => Syncrequest());
+            connection.On(methodName: "Loneclient", () => LoneClient());
+            
+
+
 
             connection.Reconnecting += error =>
             {
@@ -206,6 +208,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                 return Task.CompletedTask;
             };
+
+            connectionsolidify();
         }
 
         private void Reconnected()
@@ -250,8 +254,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
             }
             if (booted = false)
             {
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                Application.Current.Shutdown();
+                System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);
+                System.Windows.Application.Current.Shutdown();
             }
         }
 
@@ -1134,9 +1138,9 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
             var cityclicked = citylist.Find(i => i.name == trigger.Name);
 
-            if (cityclicked.owner != Selfuser)
+            if (cityclicked.owner != Selfuser )
             {
-                if (!Targeting_list_display.Items.Contains(trigger.Name))
+                if (!Targeting_list_display.Items.Contains(trigger.Name) && Targeting_list_display.Items.Count < 10)
                 {
                     Targeting_list_display.Items.Insert(0, trigger.Name);
                     Panel.SetZIndex(trigger, 21);
@@ -1538,22 +1542,22 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     if (Method == "attack1")
                     {
                         Random rnd = new Random();
-                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
+                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, 0, rnd.Next(10, 15));
                     }
                     if (Method == "attack2")
                     {
                         Random rnd = new Random();
-                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
+                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, 0, rnd.Next(10, 20));
                     }
                     if (Method == "attack3")
                     {
                         Random rnd = new Random();
-                        Attak3_timerVar = Attak3_timerVar + new TimeSpan(0, rnd.Next(3, 4), 0);
+                        Attak3_timerVar = Attak3_timerVar + new TimeSpan(0, 0, rnd.Next(10, 40));
                     }
                     if (Method == "attack4")
                     {
                         Random rnd = new Random();
-                        Attak4_timerVar = Attak4_timerVar + new TimeSpan(0, rnd.Next(4, 5), 0);
+                        Attak4_timerVar = Attak4_timerVar + new TimeSpan(0, rnd.Next(1, 3), 0);
                     }
                 }
                 else
@@ -1561,24 +1565,24 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     if (Method == "attack1" || Method == "attack2")
                     {
                         Random rnd = new Random();
-                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
-                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
+                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, 0, rnd.Next(10, 15));
+                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, 0, rnd.Next(10, 20));
 
                     }
                     if (Method == "attack3")
                     {
                         Random rnd = new Random();
-                        Attak3_timerVar = Attak3_timerVar + new TimeSpan(0, rnd.Next(3, 4), 0);
-                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
-                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
+                        Attak3_timerVar = Attak3_timerVar + new TimeSpan(0, 0, rnd.Next(10, 40));
+                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, 0, rnd.Next(10, 15));
+                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, 0, rnd.Next(10, 20));
                     }
                     if (Method == "attack4")
                     {
                         Random rnd = new Random();
-                        Attak4_timerVar = Attak4_timerVar + new TimeSpan(0, rnd.Next(4, 5), 0);
-                        Attak3_timerVar = Attak3_timerVar + new TimeSpan(0, rnd.Next(3, 4), 0);
-                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
-                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, rnd.Next(2, 3), 0);
+                        Attak4_timerVar = Attak4_timerVar + new TimeSpan(0, rnd.Next(1, 3), 0);
+                        Attak3_timerVar = Attak3_timerVar + new TimeSpan(0, 0, rnd.Next(10, 40));
+                        Attak1_timerVar = Attak1_timerVar + new TimeSpan(0, 0, rnd.Next(10, 15));
+                        Attak2_timerVar = Attak2_timerVar + new TimeSpan(0, 0, rnd.Next(10, 20));
                     }
 
                 }
@@ -1676,12 +1680,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
 
 
-        public void pickingTeam2points()
+        public async Task pickingTeam2points(IEnumerable<Polygon> hex)
         {
-            this.Dispatcher.Invoke(() =>
-            {
-                IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
-
+            
+               
+            
                 Random random = new Random();
 
                 var range = Enumerable.Range((gridWidth * 2) + 1, hex.Count()).Where(i => !exclude.Contains(i));
@@ -1903,11 +1906,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     }
                 }
 
-            });
+            
 
         }
 
-        public void pickingTeam1points()
+        public async void pickingTeam1points()
         {
             this.Dispatcher.Invoke(() =>
             {
@@ -2527,6 +2530,41 @@ namespace TS_PEACE_Client.Windows.Game_windows
         {
             this.Dispatcher.Invoke(() =>
             {
+                
+                main_grid.Children.Remove(main_grid.FindName("Reconnectinglabel1") as Label);
+
+                if(main_grid.Children.Contains((UIElement)main_grid.FindName("scrim1")))
+                {
+                    main_grid.Children.Remove(main_grid.FindName("scrim1") as Rectangle);
+                    UnregisterName("scrim1");
+                }
+                if (main_grid.Children.Contains((UIElement)main_grid.FindName("Reconnectinglabel1")))
+                {
+                    main_grid.Children.Remove(main_grid.FindName("Reconnectinglabel1") as Label);
+                    UnregisterName("Reconnectinglabel1");
+                }
+                if (main_grid.Children.Contains(main_grid.FindName("Ellipse11") as Ellipse))
+                {
+                    main_grid.Children.Remove(main_grid.FindName("Ellipse11") as Ellipse);
+                    UnregisterName("Ellipse11");
+                }
+                if (main_grid.Children.Contains(main_grid.FindName("Ellipse21") as Ellipse))
+                {
+                    main_grid.Children.Remove(main_grid.FindName("Ellipse21") as Ellipse);
+                    UnregisterName("Ellipse21");
+                }
+                if (main_grid.Children.Contains(main_grid.FindName("Ellipse31") as Ellipse))
+                {
+                    main_grid.Children.Remove(main_grid.FindName("Ellipse31") as Ellipse);
+                    UnregisterName("Ellipse31");
+                }
+
+
+
+                
+                
+                
+
                 Rectangle scrim = new Rectangle();
 
                 scrim.Fill = Brushes.Black;
@@ -2648,11 +2686,17 @@ namespace TS_PEACE_Client.Windows.Game_windows
         {
             this.Dispatcher.Invoke(() =>
             {
+                
                 main_grid.Children.Remove(main_grid.FindName("scrim") as Rectangle);
                 main_grid.Children.Remove(main_grid.FindName("synclabel") as Label);
                 main_grid.Children.Remove(main_grid.FindName("Ellipse1") as Ellipse);
                 main_grid.Children.Remove(main_grid.FindName("Ellipse2") as Ellipse);
                 main_grid.Children.Remove(main_grid.FindName("Ellipse3") as Ellipse);
+                UnregisterName("scrim");
+                UnregisterName("synclabel");
+                UnregisterName("Ellipse1");
+                UnregisterName("Ellipse2");
+                UnregisterName("Ellipse3");
             });
         }
 
@@ -2783,5 +2827,321 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
             });
         }
+
+        public async void connectionsolidify()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                Rectangle scrim = new Rectangle();
+
+                scrim.Fill = Brushes.Black;
+                scrim.Opacity = 0.8;
+                scrim.Name = "scrim";
+                Grid.SetColumnSpan(scrim, 3);
+                Grid.SetRowSpan(scrim, 4);
+                Panel.SetZIndex(scrim, 40);
+
+                Label text = new Label();
+                text.Content = "Connecting to server";
+                text.Foreground = Brushes.White;
+                text.FontFamily = new FontFamily("Avara");
+                text.Name = "synclabel";
+                text.FontSize = 100;
+                Grid.SetColumnSpan(text, 3);
+                Grid.SetRow(text, 0);
+                Grid.SetZIndex(text, 41);
+                text.HorizontalAlignment = HorizontalAlignment.Center;
+                text.VerticalAlignment = VerticalAlignment.Bottom;
+
+
+                Ellipse ellipse1 = new Ellipse();
+                ellipse1.Fill = Brushes.White;
+                ellipse1.Width = 40;
+                ellipse1.Height = 40;
+                ellipse1.Opacity = 1;
+                Panel.SetZIndex(ellipse1, 45);
+                Grid.SetRow(ellipse1, 1);
+                Grid.SetColumn(ellipse1, 1);
+
+                Ellipse ellipse2 = new Ellipse();
+                ellipse2.Fill = Brushes.White;
+                ellipse2.Width = 40;
+                ellipse2.Height = 40;
+                ellipse2.Opacity = 1;
+                ellipse2.Margin = new Thickness(193, 70, 400, 70);
+                Panel.SetZIndex(ellipse2, 45);
+                Grid.SetRow(ellipse2, 1);
+                Grid.SetColumn(ellipse2, 1);
+
+                Ellipse ellipse3 = new Ellipse();
+                ellipse3.Fill = Brushes.White;
+                ellipse3.Width = 40;
+                ellipse3.Height = 40;
+                ellipse3.Opacity = 1;
+                ellipse3.Margin = new Thickness(400, 70, 200, 70);
+                Panel.SetZIndex(ellipse3, 45);
+                Grid.SetRow(ellipse3, 1);
+                Grid.SetColumn(ellipse3, 1);
+
+                DoubleAnimation da1 = new DoubleAnimation();
+                da1.From = -1;
+                da1.To = 1;
+                da1.BeginTime = TimeSpan.FromSeconds(1);
+                da1.Duration = TimeSpan.FromSeconds(2);
+                da1.RepeatBehavior = RepeatBehavior.Forever;
+                da1.AutoReverse = true;
+
+
+                DoubleAnimation da2 = new DoubleAnimation();
+                da2.From = -1;
+                da2.To = 1;
+                da2.BeginTime = TimeSpan.FromSeconds(0);
+                da2.Duration = TimeSpan.FromSeconds(2);
+                da2.RepeatBehavior = RepeatBehavior.Forever;
+                da2.AutoReverse = true;
+
+                DoubleAnimation da3 = new DoubleAnimation();
+                da3.From = -1;
+                da3.To = 1;
+                da3.BeginTime = TimeSpan.FromSeconds(2);
+                da3.Duration = TimeSpan.FromSeconds(2);
+                da3.RepeatBehavior = RepeatBehavior.Forever;
+                da3.AutoReverse = true;
+
+                Storyboard sb1 = new Storyboard();
+
+
+                Storyboard.SetTarget(da1, ellipse1);
+                Storyboard.SetTargetProperty(da1, new PropertyPath(Ellipse.OpacityProperty));
+
+
+                Storyboard.SetTarget(da2, ellipse2);
+                Storyboard.SetTargetProperty(da2, new PropertyPath(Ellipse.OpacityProperty));
+
+
+                Storyboard.SetTarget(da3, ellipse3);
+                Storyboard.SetTargetProperty(da3, new PropertyPath(Ellipse.OpacityProperty));
+
+                sb1.Children.Add(da1);
+                sb1.Children.Add(da2);
+                sb1.Children.Add(da3);
+
+
+                RegisterName("scrim1", scrim);
+                RegisterName("Reconnectinglabel1", text);
+                RegisterName("Ellipse11", ellipse1);
+                RegisterName("Ellipse21", ellipse2);
+                RegisterName("Ellipse31", ellipse3);
+                
+
+                main_grid.Children.Add(scrim);
+                main_grid.Children.Add(ellipse1);
+                main_grid.Children.Add(ellipse2);
+                main_grid.Children.Add(ellipse3);
+                main_grid.Children.Add(text);
+
+                sb1.Begin();
+
+            });
+
+            try
+            {
+                await connection.StartAsync();
+                Console.WriteLine("connected");
+                main_grid.Children.Remove(main_grid.FindName("Ellipse11") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse21") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse31") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("scrim1") as Rectangle);
+                main_grid.Children.Remove(main_grid.FindName("Reconnectinglabel1") as Label);
+                UnregisterName("scrim1");
+                UnregisterName("Reconnectinglabel1");
+                UnregisterName("Ellipse11");
+                UnregisterName("Ellipse21");
+                UnregisterName("Ellipse31");
+                await connection.InvokeAsync(methodName: "UserCheck");
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                
+                main_grid.Children.Remove(main_grid.FindName("Ellipse11") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse21") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse31") as Ellipse);
+                var exibutton = (main_grid.FindName("Exitbutton") as Button);
+                Grid.SetZIndex(exibutton, 42);
+                var title = main_grid.FindName("Reconnectinglabel1") as Label;
+
+                title.Content = "Connection failed";
+
+                TimeSpan recoontetingtime = TimeSpan.FromSeconds(30);
+
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = "retrying in " + recoontetingtime;
+
+                textBlock.Foreground = Brushes.White;
+                textBlock.FontFamily = new FontFamily("Avara");
+                textBlock.FontSize = 50;
+                textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                textBlock.VerticalAlignment = VerticalAlignment.Bottom;
+                textBlock.Margin = new Thickness(0, 0, 0, 100);
+                textBlock.Name = "reconnectingtextblock";
+                Grid.SetColumnSpan(textBlock, 3);
+                Grid.SetRow(textBlock, 1);
+                Grid.SetZIndex(textBlock, 41);
+
+                main_grid.Children.Add(textBlock);
+
+                while(recoontetingtime > TimeSpan.Zero)
+                {
+                    await Task.Delay(1000);
+                    recoontetingtime = recoontetingtime.Subtract(TimeSpan.FromSeconds(1));
+                    textBlock.Text = "retrying in " + recoontetingtime;
+                }
+                main_grid.Children.Remove(textBlock);
+                main_grid.Children.Remove(main_grid.FindName("scrim1") as Rectangle);
+                main_grid.Children.Remove(main_grid.FindName("Reconnectinglabel1") as Label);
+
+                
+                UnregisterName("scrim1");
+                UnregisterName("Reconnectinglabel1");
+                UnregisterName("Ellipse11");
+                UnregisterName("Ellipse21");
+                UnregisterName("Ellipse31");
+                
+                connectionsolidify();
+
+            }
+
+
+        }
+
+        public async Task Syncrequest()
+        {
+            
+            Syncmapbutton_Click(null, null);
+
+        }
+
+        public async Task LoneClient()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                Rectangle scrim = new Rectangle();
+
+                scrim.Fill = Brushes.Black;
+                scrim.Opacity = 0.8;
+                scrim.Name = "scrim";
+                Grid.SetColumnSpan(scrim, 3);
+                Grid.SetRowSpan(scrim, 4);
+                Panel.SetZIndex(scrim, 40);
+
+                Label text = new Label();
+                text.Content = "Awaiting second player";
+                text.Foreground = Brushes.White;
+                text.FontFamily = new FontFamily("Avara");
+                text.Name = "synclabel";
+                text.FontSize = 100;
+                Grid.SetColumnSpan(text, 3);
+                Grid.SetRow(text, 0);
+                Grid.SetZIndex(text, 41);
+                text.HorizontalAlignment = HorizontalAlignment.Center;
+                text.VerticalAlignment = VerticalAlignment.Bottom;
+
+
+                Ellipse ellipse1 = new Ellipse();
+                ellipse1.Fill = Brushes.White;
+                ellipse1.Width = 40;
+                ellipse1.Height = 40;
+                ellipse1.Opacity = 1;
+                Panel.SetZIndex(ellipse1, 45);
+                Grid.SetRow(ellipse1, 1);
+                Grid.SetColumn(ellipse1, 1);
+
+                Ellipse ellipse2 = new Ellipse();
+                ellipse2.Fill = Brushes.White;
+                ellipse2.Width = 40;
+                ellipse2.Height = 40;
+                ellipse2.Opacity = 1;
+                ellipse2.Margin = new Thickness(193, 70, 400, 70);
+                Panel.SetZIndex(ellipse2, 45);
+                Grid.SetRow(ellipse2, 1);
+                Grid.SetColumn(ellipse2, 1);
+
+                Ellipse ellipse3 = new Ellipse();
+                ellipse3.Fill = Brushes.White;
+                ellipse3.Width = 40;
+                ellipse3.Height = 40;
+                ellipse3.Opacity = 1;
+                ellipse3.Margin = new Thickness(400, 70, 200, 70);
+                Panel.SetZIndex(ellipse3, 45);
+                Grid.SetRow(ellipse3, 1);
+                Grid.SetColumn(ellipse3, 1);
+
+                DoubleAnimation da1 = new DoubleAnimation();
+                da1.From = -1;
+                da1.To = 1;
+                da1.BeginTime = TimeSpan.FromSeconds(1);
+                da1.Duration = TimeSpan.FromSeconds(2);
+                da1.RepeatBehavior = RepeatBehavior.Forever;
+                da1.AutoReverse = true;
+
+
+                DoubleAnimation da2 = new DoubleAnimation();
+                da2.From = -1;
+                da2.To = 1;
+                da2.BeginTime = TimeSpan.FromSeconds(0);
+                da2.Duration = TimeSpan.FromSeconds(2);
+                da2.RepeatBehavior = RepeatBehavior.Forever;
+                da2.AutoReverse = true;
+
+                DoubleAnimation da3 = new DoubleAnimation();
+                da3.From = -1;
+                da3.To = 1;
+                da3.BeginTime = TimeSpan.FromSeconds(2);
+                da3.Duration = TimeSpan.FromSeconds(2);
+                da3.RepeatBehavior = RepeatBehavior.Forever;
+                da3.AutoReverse = true;
+
+                Storyboard sb1 = new Storyboard();
+
+
+                Storyboard.SetTarget(da1, ellipse1);
+                Storyboard.SetTargetProperty(da1, new PropertyPath(Ellipse.OpacityProperty));
+
+
+                Storyboard.SetTarget(da2, ellipse2);
+                Storyboard.SetTargetProperty(da2, new PropertyPath(Ellipse.OpacityProperty));
+
+
+                Storyboard.SetTarget(da3, ellipse3);
+                Storyboard.SetTargetProperty(da3, new PropertyPath(Ellipse.OpacityProperty));
+
+                sb1.Children.Add(da1);
+                sb1.Children.Add(da2);
+                sb1.Children.Add(da3);
+
+
+                RegisterName("scrim1", scrim);
+                RegisterName("Reconnectinglabel1", text);
+                RegisterName("Ellipse11", ellipse1);
+                RegisterName("Ellipse21", ellipse2);
+                RegisterName("Ellipse31", ellipse3);
+
+
+                main_grid.Children.Add(scrim);
+                main_grid.Children.Add(ellipse1);
+                main_grid.Children.Add(ellipse2);
+                main_grid.Children.Add(ellipse3);
+                main_grid.Children.Add(text);
+
+                sb1.Begin();
+
+            });
+        }
+
+
+
     }
 }

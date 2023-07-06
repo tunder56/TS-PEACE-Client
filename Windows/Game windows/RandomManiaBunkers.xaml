@@ -28,6 +28,7 @@
         <Button x:Name="TeamSet_Button1" Grid.Row="1" FontSize="80" Margin="140,0,0,0" Grid.Column="0" Click="TeamSet_Button1_Click" Panel.ZIndex="3" FontFamily="AUTHENTIC Sans 60">Team 1</Button>
         <Button Name="TeamSet_Button2" Grid.Row="1" Grid.Column="2" FontSize="80" Margin="0,0,140,0" Panel.ZIndex="3" FontFamily="AUTHENTIC Sans 60" Click="TeamSet_Button2_Click">Team 2</Button>
 
+        <Button x:Name="Exitbutton" Content="Exit"  Grid.Column="2" Grid.Row="0" FontSize="30" FontFamily="avara" Click="Exitbutton_Click" Panel.ZIndex="50" Width="100" Height="70" VerticalAlignment="top" HorizontalAlignment="Right" ></Button>
 
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Stroke="Black" />
         <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"  >
@@ -107,7 +108,7 @@
 
             <Label Name="message_title" Content="Messages" HorizontalContentAlignment="Center" FontSize="36" Foreground="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5" FontWeight="Bold" FontFamily="Avara" />
             <Button x:Name="Syncmapbutton" Content="Sync" Width="150" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" FontSize="30" FontFamily="avara" Click="Syncmapbutton_Click" ></Button>
-            <Button x:Name="Exitbutton" Content="Exit"  Grid.Column="1" Grid.Row="0" FontSize="30" FontFamily="avara" Click="Exitbutton_Click" ></Button>
+            
             <TextBox x:Name="message_textbox" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Enter your text here..."  FontSize="36"  KeyDown="entercheck" GotFocus="messegge_textbox_focus" LostFocus="message_textbox_LostFocus" Panel.ZIndex="1" FontFamily="AUTHENTIC Sans 60"/>
             <Button x:Name="messagesend_button" Grid.Column="1" Content="Send"   Grid.Row="2"  FontSize="30" FontWeight="Bold" Click="messagesend_button_Click" Panel.ZIndex="1" FontFamily="Avara Black"/>
             <ListBox x:Name="messagedisplay_box" Grid.ColumnSpan="2" Grid.Row="1" HorizontalContentAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="AUTHENTIC Sans 90" >

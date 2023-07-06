@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TS_PEACE_Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
         <Button Content="Bunker" HorizontalAlignment="Left" Height="77" Margin="550,0,0,0" VerticalAlignment="Center" Width="167" Click="Bunkers" FontFamily="AUTHENTIC Sans 90" FontSize="16"/>
         <Button Content="Moderator Portal" HorizontalAlignment="Center" Height="77" VerticalAlignment="Center" Width="168" Click="Modportal" FontFamily="AUTHENTIC Sans 90" FontSize="16"/>
         <Button Content="Settings" HorizontalAlignment="Left" Height="77" Margin="72,0,0,0" VerticalAlignment="Center" Width="167" Click="Settings" FontFamily="AUTHENTIC Sans 90" FontSize="16"/>
-        <Label Content="Terra Symposium Launcher" HorizontalAlignment="Center" VerticalAlignment="Top" Height="93" Width="658" FontSize="40" FontFamily="Avara " Margin="0,81,0,0" />
+        <Label Content="Terra Symposium Launcher" HorizontalAlignment="Center" VerticalAlignment="Top" Height="93" Width="664" FontSize="40" FontFamily="Avara " Margin="0,81,0,0" />
         <Button Content="Tutorial" HorizontalAlignment="Center" Height="77" VerticalAlignment="Top" Width="168" Click="Tutorial" Margin="0,313,0,0" FontFamily="AUTHENTIC Sans 90" FontSize="16"/>
         <Button Content="Bunker Random mania" HorizontalAlignment="Left" Height="77" Margin="550,308,0,0" VerticalAlignment="Top" Width="167" Click="RandomBunkers" FontFamily="AUTHENTIC Sans 90" FontSize="16"/>
 
