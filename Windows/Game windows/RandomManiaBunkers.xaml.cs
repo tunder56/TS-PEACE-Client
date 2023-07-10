@@ -153,13 +153,12 @@ namespace TS_PEACE_Client.Windows.Game_windows
             Timertick3();
             Timertick4();
             MainWindow_Loaded();
-            Reboottimer();
+            Task.Run(Reboottimer);
             bannedletters = bannedlettersS.ToCharArray();
 
-            IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
-            pickingTeam1points();
-            Task.Run(() => pickingTeam2points(hex));
 
+            pickingTeam1points();
+            pickingTeam2points();
 
             booted = true;
 
@@ -244,7 +243,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         }
 
-        public async void Reboottimer()
+        public async Task Reboottimer()
         {
             TimeSpan boottimer = new TimeSpan(0, 0, 0, 30);
             while (boottimer.TotalSeconds > 0)
@@ -252,10 +251,21 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 boottimer = boottimer.Subtract(new TimeSpan(0, 0, 0, 1));
                 await Task.Delay(1000);
             }
-            if (booted = false)
+            if (booted == false)
             {
-                System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);
-                System.Windows.Application.Current.Shutdown();
+                var s = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string strWorkPath = System.IO.Path.GetDirectoryName(s);
+                string strSettingsXmlFilePath = System.IO.Path.Combine(strWorkPath, "TS-PEACE-Client.exe");
+                System.Diagnostics.Process.Start(strSettingsXmlFilePath);
+                string messageBoxText = "Generating map took too long, Rebooting";
+                string caption = "TS P.E.A.C.E CLient error";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                Environment.Exit(1003);
+                return;
             }
         }
 
@@ -1680,10 +1690,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
 
 
-        public async Task pickingTeam2points(IEnumerable<Polygon> hex)
+        public async void pickingTeam2points()
         {
-            
-               
+            this.Dispatcher.Invoke(() =>
+            {
+                IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
             
                 Random random = new Random();
 
@@ -1801,7 +1812,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         outerids.Add(selecting + (gridWidth + 1));
                         outerids.Add(selecting - (gridWidth * 2));
                         outerids.Add(selecting + (gridWidth * 2));
-
+                        
                         throw;
                     }
 
@@ -1906,7 +1917,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     }
                 }
 
-            
+            });
 
         }
 

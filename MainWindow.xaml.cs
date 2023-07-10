@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TS_PEACE_Client.Windows;
 using TS_PEACE_Client.Windows.Game_windows;
 using TS_PEACE_Client.Windows.Settings_windows;
 using TS_PEACE_Client.Windows.Tutorial_windows;
@@ -38,9 +40,36 @@ namespace TS_PEACE_Client
 
         private void RandomBunkers(object sender, RoutedEventArgs e)
         {
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationToken token = cts.Token;
+
+            loading l = new loading();
+            l.token = token;
+            
+            Thread newWindowThread = new Thread(new ThreadStart(l.ThreadStartingPoint));
+            newWindowThread.SetApartmentState(ApartmentState.STA);
+            newWindowThread.IsBackground = true;
+            newWindowThread.Start();
+
+
+
+
             RandomManiaBunkers win = new RandomManiaBunkers();
+
+
+
+
             win.Show();
-            this.Close();
+
+           
+
+
+            var dis = System.Windows.Threading.Dispatcher.FromThread(newWindowThread);
+            dis.InvokeShutdown();
+           
+           this.Close();
+            
         }
 
         private void Settings(object sender, RoutedEventArgs e)
@@ -61,5 +90,23 @@ namespace TS_PEACE_Client
             win.Show();
             this.Close();
         }
+
+        class loading
+        {
+            public CancellationToken token;
+            public void ThreadStartingPoint()
+            {
+
+                loadingwindow tempWindow = new loadingwindow();
+                tempWindow.Show();
+                System.Windows.Threading.Dispatcher.Run();
+                
+            }
+            
+
+        }
+
+       
+
     }
 }
