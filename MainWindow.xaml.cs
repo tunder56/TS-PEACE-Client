@@ -40,30 +40,15 @@ namespace TS_PEACE_Client
 
         private void RandomBunkers(object sender, RoutedEventArgs e)
         {
-
-            CancellationTokenSource cts = new CancellationTokenSource();
-            CancellationToken token = cts.Token;
-
             loading l = new loading();
-            l.token = token;
-            
+
             Thread newWindowThread = new Thread(new ThreadStart(l.ThreadStartingPoint));
             newWindowThread.SetApartmentState(ApartmentState.STA);
             newWindowThread.IsBackground = true;
             newWindowThread.Start();
 
-
-
-
             RandomManiaBunkers win = new RandomManiaBunkers();
-
-
-
-
             win.Show();
-
-           
-
 
             var dis = System.Windows.Threading.Dispatcher.FromThread(newWindowThread);
             dis.InvokeShutdown();
