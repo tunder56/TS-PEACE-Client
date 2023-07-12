@@ -7,7 +7,9 @@
          mc:Ignorable="d"
         WindowState="Maximized"
         WindowStyle="None"
-        Title="RandomManiaBunkers" Height="1080" Width="1920">
+        Title="RandomManiaBunkers" Height="1080" Width="1920"
+        
+        ResizeMode="CanMinimize">
     <Grid x:Name="main_grid" Background="#FF373737">
         <Grid.RowDefinitions>
             <RowDefinition Height="180*"></RowDefinition>

@@ -5,75 +5,115 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TS_PEACE_Client.Windows.Settings_windows"
         mc:Ignorable="d"
-        Title="Settingswindow" Height="450" Width="800">
-    <Grid>
-        <Rectangle HorizontalAlignment="Center" Height="450" Stroke="White" VerticalAlignment="Center" Width="798" Fill="#FF9B6161"/>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="739,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="5.479,0.277" />
-        <Button Content="Save and apply&#xD;&#xA;" HorizontalAlignment="Left" Margin="623,404,0,0" VerticalAlignment="Top" Height="22"/>
-        <Slider  HorizontalAlignment="Left" Height="22" Margin="229,164,0,0" VerticalAlignment="Top" Width="325"/>
-        <Label Content="Master volume&#xD;&#xA;" HorizontalAlignment="Left" Margin="140,157,0,0" VerticalAlignment="Top" Height="29"/>
-        <Slider HorizontalAlignment="Left" Height="22" Margin="229,203,0,0" VerticalAlignment="Top" Width="325"/>
-        <Label Content="SFX&#xD;&#xA;" HorizontalAlignment="Left" Margin="163,199,0,0" VerticalAlignment="Top"/>
-        <Label Content="Resolution&#xD;&#xA;" HorizontalAlignment="Left" Margin="310,241,0,0" VerticalAlignment="Top"/>
-        <Label Content="Basic settings&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.255,0.418"/>
-        <ComboBox HorizontalAlignment="Left" Margin="199,344,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
-            <ComboBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.434"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ComboBox.RenderTransform>
-        </ComboBox>
-        <Label Content="TImers&#xD;&#xA;" HorizontalAlignment="Left" Margin="345,288,0,0" VerticalAlignment="Top"/>
-        <Label Content="Attack 1 timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="108,338,0,0" VerticalAlignment="Top" Height="29"/>
-        <ComboBox HorizontalAlignment="Left" Margin="334,344,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
-            <ComboBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.434"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ComboBox.RenderTransform>
-        </ComboBox>
-        <Label Content="Attack2 timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="250,338,0,0" VerticalAlignment="Top" Height="29"/>
-        <ComboBox HorizontalAlignment="Left" Margin="482,344,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
-            <ComboBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.434"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ComboBox.RenderTransform>
-        </ComboBox>
-        <Label Content="Attack 3 Timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="392,339,0,0" VerticalAlignment="Top" Height="27"/>
-        <ComboBox HorizontalAlignment="Left" Margin="627,343,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
-            <ComboBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.434"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ComboBox.RenderTransform>
-        </ComboBox>
-        <Label Content="Attack 4  timer&#xD;&#xA;" HorizontalAlignment="Left" Margin="535,339,0,0" VerticalAlignment="Top" Height="28"/>
-        <Button Content="Adavanced settings" HorizontalAlignment="Left" Margin="32,396,0,0" VerticalAlignment="Top" Height="37" Width="116"/>
-        <ComboBox HorizontalAlignment="Left" Margin="393,249,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
-            <ComboBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.434"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ComboBox.RenderTransform>
-        </ComboBox>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="568,160,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="568,196,0,0" VerticalAlignment="Top"/>
+        Title="Settingswindow" Height="450" Width="800"
+            >
+    <Grid Background="#FF9B6161" Name="main_grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.025*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.025*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.025*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition Height="0.025*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Content="Exit" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="8" Grid.Row="0" Width="80" Height="30" Click="Exit"/>
+        <Button Content="Save and apply" Grid.Column="7" Grid.Row="4" VerticalAlignment="Bottom" Width="100" HorizontalAlignment="Center" Height="30" Click="Button_Click"/>
+        <Label Content="Settings"  VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontFamily="Avara" FontSize="40" Margin="0,26,0,0"/>
+
+        <Label Content="Colors" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"  Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="20" FontFamily="AUTHENTIC Sans 90" />
+        
+        
+        <Grid x:Name="Attack1grid" Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="Attack 1" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <ComboBox Name="Attack1box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+
+            </ComboBox>
+        </Grid>
+        <Rectangle x:Name="Attack1rec" Fill="Wheat" Grid.Column="1" Grid.Row="3"/>
+
+
+
+        <Grid x:Name="Attack2grid" Grid.Row="1" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="Attack 2" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <ComboBox Name="Attack2box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+
+            </ComboBox>
+        </Grid>
+        <Rectangle x:Name="Attack2rec" Fill="Wheat" Grid.Column="3" Grid.Row="3"/>
+
+
+        <Grid x:Name="Attack3grid" Grid.Row="1" Grid.Column="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="Attack 3" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <ComboBox Name="Attack3box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+
+            </ComboBox>
+        </Grid>
+        <Rectangle x:Name="Attack3rec" Fill="Wheat" Grid.Column="5" Grid.Row="3"/>
+
+
+        <Grid x:Name="Attack4grid" Grid.Row="1" Grid.Column="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="Attack 4" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
+            <ComboBox Name="Attack4box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+
+            </ComboBox>
+        </Grid>
+        <Rectangle x:Name="Attack4rec" Fill="Wheat" Grid.Column="7" Grid.Row="3"/>
+
+
 
     </Grid>
+
+
 </Window>

@@ -49,6 +49,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
         SolidColorBrush OwnLand = new SolidColorBrush();
         SolidColorBrush Elseland = new SolidColorBrush();
 
+       
 
 
         // status variables
@@ -195,12 +196,12 @@ namespace TS_PEACE_Client.Windows.Game_windows
             ActivefillSelectedBox.Color = Color.FromArgb(100, 255, 255, 255);
             TargetedBorder.Color = Color.FromArgb(80, 255, 178, 178);
             Untargeted.Color = Color.FromArgb(0, 0, 0, 0);
-            Attack1Hitfill.Color = Color.FromArgb(80, 116, 0, 129);
-            Attack2Hitfill.Color = Color.FromArgb(77, 1, 139, 0);
-            Attack3Hitfill.Color = Color.FromArgb(77, 141, 95, 0);
-            Attack4Hitfill.Color = Color.FromArgb(77, 161, 184, 14);
-            OwnLand = new SolidColorBrush(Color.FromRgb(90, 105, 236));
-            Elseland = new SolidColorBrush(Color.FromRgb(215, 94, 67));
+            Attack1Hitfill.Color = Color.FromArgb(GSettings.Default.Attack1color.A, GSettings.Default.Attack1color.R, GSettings.Default.Attack1color.G, GSettings.Default.Attack1color.B);
+            Attack2Hitfill.Color = Color.FromArgb(GSettings.Default.Attack2color.A, GSettings.Default.Attack2color.R, GSettings.Default.Attack2color.G, GSettings.Default.Attack2color.B);
+            Attack3Hitfill.Color = Color.FromArgb(GSettings.Default.Attack3color.A, GSettings.Default.Attack3color.R, GSettings.Default.Attack3color.G, GSettings.Default.Attack3color.B);
+            Attack4Hitfill.Color = Color.FromArgb(GSettings.Default.Attack4color.A, GSettings.Default.Attack4color.R, GSettings.Default.Attack4color.G, GSettings.Default.Attack4color.B);
+            OwnLand = new SolidColorBrush(Color.FromArgb(GSettings.Default.Ownlandcolor.A, GSettings.Default.Ownlandcolor.R, GSettings.Default.Ownlandcolor.G, GSettings.Default.Ownlandcolor.B));
+            Elseland = new SolidColorBrush(Color.FromArgb(GSettings.Default.Elselandcolor.A, GSettings.Default.Elselandcolor.R, GSettings.Default.Elselandcolor.G, GSettings.Default.Elselandcolor.B));
         }
 
         private void Timersetup()
@@ -1293,6 +1294,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         }
 
-
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
     }
 }

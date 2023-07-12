@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TS_PEACE_Client" GeneratedClassName="GlobalSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Attack1color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">240, 201, 135</Value>
+    </Setting>
+    <Setting Name="Attack2color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">97, 137, 133</Value>
+    </Setting>
+    <Setting Name="Attack3color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">149, 125, 149</Value>
+    </Setting>
+    <Setting Name="Attack4color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">239, 111, 108</Value>
+    </Setting>
+    <Setting Name="Ownlandcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">90, 105, 236</Value>
+    </Setting>
+    <Setting Name="Elselandcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">215, 94, 67</Value>
+    </Setting>
+    <Setting Name="Targeted" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">213, 213, 213</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

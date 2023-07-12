@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RandomNameGeneratorLibrary;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -291,9 +292,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
             TargetedBorder.Color = Color.FromArgb(100, 213, 213, 213);
 
             Untargeted.Color = Color.FromArgb(100, 59, 56, 57);
-
-            Attack1Hitfill.Color = Color.FromArgb(80, 116, 0, 129);
-
+            
+            Attack1Hitfill.Color = Color.FromArgb(GSettings.Default.Attack1color.A, GSettings.Default.Attack1color.R, GSettings.Default.Attack1color.G, GSettings.Default.Attack1color.B);
             Attack2Hitfill.Color = Color.FromArgb(77, 1, 139, 0);
 
             Attack3Hitfill.Color = Color.FromArgb(77, 141, 95, 0);

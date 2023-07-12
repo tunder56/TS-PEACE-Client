@@ -1,19 +1,8 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TS_PEACE_Client.Windows;
 using TS_PEACE_Client.Windows.Game_windows;
 using TS_PEACE_Client.Windows.Settings_windows;
@@ -29,6 +18,8 @@ namespace TS_PEACE_Client
         public MainWindow()
         {
             InitializeComponent();
+
+           
         }
 
         private void Bunkers(object sender, RoutedEventArgs e)
@@ -66,7 +57,11 @@ namespace TS_PEACE_Client
 
         private void Modportal(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var uri = "https://terrasymposium.com/";
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            System.Diagnostics.Process.Start(psi);
         }
 
         private void Tutorial(object sender, RoutedEventArgs e)
