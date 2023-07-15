@@ -26,6 +26,7 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
         bool Attack3_status = false;
         bool Attack4_status = false;
         int tutorialpart = 1;
+        // city class
         public class city
         {
             public string name;
@@ -33,7 +34,10 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             public int y;
             public string owner;
         }
+        // initialise city list
         List<city> citylist = new List<city>();
+
+        // variables to handle username and colors
         string Selfuser = "Team1";
         SolidColorBrush Disabledfill = new SolidColorBrush();
         SolidColorBrush Disabledfilltext = new SolidColorBrush();
@@ -49,22 +53,26 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
         SolidColorBrush OwnLand = new SolidColorBrush();
         SolidColorBrush Elseland = new SolidColorBrush();
 
+        // timer variables
         TimeSpan Attak1_timerVar;
         TimeSpan Attak2_timerVar;
         TimeSpan Attak3_timerVar;
         TimeSpan Attak4_timerVar;
         
+        // attack variables
         string pastattack = null;
         string currentattack = null;
+
+        // main line code
         public Tutorialpart3()
         {
             InitializeComponent();
-            // messeaging and strike feed?
 
 
 
 
 
+            // set colors
             OwnLand = new SolidColorBrush(Color.FromRgb(90, 105, 236));
             TargetedBorder.Color = Color.FromArgb(80, 255, 178, 178);
 
@@ -78,11 +86,12 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             Attack3_box.Fill = Disabledfill;
             Attack4_box.Fill = Disabledfill;
 
-
             path139.Stroke = OwnLand;
             path143.Stroke = OwnLand;
             path147.Stroke = OwnLand;
             path145.Stroke = OwnLand;
+
+            // get all citys on map and add them to the city list with owners and locations
             IEnumerable<Ellipse> Circle = map.Children.OfType<Ellipse>();
 
             foreach (var c in Circle)
@@ -98,6 +107,7 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
                 }
                 citylist.Add(new city { name = c.Name, x = Convert.ToInt32(c.GetValue(Canvas.LeftProperty)), y = Convert.ToInt32(c.GetValue(Canvas.TopProperty)), owner = ownerout });
             }
+            // set up
             setup();
             Timertick1();
             Part1();
@@ -139,29 +149,6 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
             Elseland = new SolidColorBrush(Color.FromRgb(215, 94, 67));
 
-        }
-
-        private void Timercheck()
-        {
-            // check if timers are above zero and if they are active, if so make sure they tick
-
-            if (Attak1_timerVar > new TimeSpan(00, 00, 00) && Attack1_status == true)
-            {
-                Timertick1();
-
-            }
-            if (Attak2_timerVar > new TimeSpan(00, 00, 00) && Attack2_status == true)
-            {
-                Timertick2();
-            }
-            if (Attak3_timerVar > new TimeSpan(00, 00, 00) && Attack3_status == true)
-            {
-                Timertick3();
-            }
-            if (Attak4_timerVar > new TimeSpan(00, 00, 00) && Attack4_status == true)
-            {
-                Timertick4();
-            }
         }
 
         public async Task Timertick1()
@@ -316,6 +303,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             this.Attack4_timer.Text = Attak4_timerVar.ToString();
         }
 
+
+        //methods to handle tutorial parts
         public void Part1()
         {
             this.Dispatcher.Invoke(() =>
@@ -399,6 +388,7 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
         }
 
 
+        // modified map click method to handle tutorial
         public void map_click(object sender, RoutedEventArgs e)
         {
             // get the name of the ellipse clicked, add to targeting list, unless allready in list then remove
@@ -474,6 +464,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
 
         }
+
+        // methods to handle button clicks
         public void Finsh()
         {
             Window win = new MainWindow();

@@ -26,8 +26,9 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-
+                <!--Rectangle as map background-->
                 <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Stroke="Black" />
+                <!--Map viewbox with map on canvas-->
                 <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" >
                     <Canvas x:Name="map" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  Canvas.Left="0" Canvas.Top="0" HorizontalAlignment="Center" Width="983.6" Height="708.7" Panel.ZIndex="1">
                         <Canvas.RenderTransform>
@@ -101,6 +102,7 @@
                         <Ellipse xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="680.5" Canvas.Top="357.3" Width="10" Height="10" Name="circle261" Fill="#000000" MouseLeftButtonUp="map_click" Uid="1"/>
                     </Canvas>
                 </Viewbox>
+                <!--Grid with targeting elements-->
                 <Grid x:Name="targeting_grid" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.25*"></RowDefinition>
@@ -111,6 +113,7 @@
                     <Rectangle  Name="targetingrec" Grid.Row="0" Grid.RowSpan="2" Stroke="Black" Fill="Black" Panel.ZIndex="4" Opacity="0.0"  />
 
                 </Grid>
+                <!--Grid with attack elements-->
                 <Grid x:Name="attak_grid" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
@@ -154,6 +157,7 @@
                     <Button x:Name="sendattack_button" Grid.Column="2" Content="Attack" Grid.Row="0" Margin="24,52,40,10" Grid.RowSpan="3" Background="{x:Null}" Foreground="White" FontSize="25" BorderBrush="Black"  Panel.ZIndex="1" FontFamily="Avara Black" Click="Button_Click"/>
                     
                 </Grid>
+                <!--Grid with adapted message items to display tutorial-->
                 <Grid x:Name="message_grid" Grid.Column="2" Grid.Row="0">
 
                     <Grid.RowDefinitions>
@@ -167,31 +171,15 @@
                         <ColumnDefinition Width="0*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <!--<Rectangle x:Name="message_box" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3"  Stroke="Black"></Rectangle>-->
-
                     <Label Name="message_title" Content="Tutorial 3" HorizontalContentAlignment="Center" FontSize="36" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="0,0,0,5" FontWeight="Bold" FontFamily="Avara" />
-                    <!--<TextBox x:Name="message_textbox" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Enter your text here..."  FontSize="36"  KeyDown="entercheck" GotFocus="messegge_textbox_focus" LostFocus="message_textbox_LostFocus" Panel.ZIndex="1" FontFamily="AUTHENTIC Sans 60"/>
-                    <Button x:Name="messagesend_button" Grid.Column="1" Content="Send"   Grid.Row="2"  FontSize="30" FontWeight="Bold" Click="messagesend_button_Click" Panel.ZIndex="1" FontFamily="Avara Black"/>-->
                     <ListBox x:Name="messagedisplay_box" HorizontalContentAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="AUTHENTIC Sans 90" Margin="0,73,0,0" Grid.RowSpan="2" >
-                        <!--<ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock
-                    Text="{Binding}"
-                    TextWrapping="Wrap"
-
-                    />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>-->
                     </ListBox>
                     <Button Name="lastbutton" Content="Last"  HorizontalAlignment="Left" Height="78" Margin="163,3,0,0" VerticalAlignment="Top" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>
                     <Button x:Name="nextbutton" Content="Next"  HorizontalAlignment="Left" Height="78" Margin="328,4,0,0" VerticalAlignment="Top" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>
 
-
-
                 </Grid>
 
+                <!--Grid with stikefeed elements-->
                 <Grid x:Name="strikefeed_grid" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.2*"></RowDefinition>

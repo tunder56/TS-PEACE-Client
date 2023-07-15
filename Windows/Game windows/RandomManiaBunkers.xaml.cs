@@ -3,25 +3,17 @@ using Newtonsoft.Json;
 using RandomNameGeneratorLibrary;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TS_PEACE_Client.Windows.Game_windows
 {
@@ -59,25 +51,18 @@ namespace TS_PEACE_Client.Windows.Game_windows
         bool Attack4_status = false;
 
 
-        // targeting list variable
-
-        List<string> targeting = new List<string>();
+        // hashset for excluding hexagons
 
 
         HashSet<int> exclude = new HashSet<int>();
 
-        int m_width { get; set; }
-        int m_height { get; set; }
-
-
-
-        Point point1 = new Point();
-        Point point2 = new Point();
-
+        // hexagon variables
         int total = 0;
-
+        public int gridWidth = 32;  // Number of hexagons per row
+        public int gridHeight = 64;
         bool[] offsetrow = new bool[64];
-
+        
+        // lists for storing hexagonids according to who they belong to
         List<int> team1landmass = new List<int>();
         List<int> team2landmass = new List<int>();
 
@@ -103,10 +88,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
         HubConnection connection;
 
 
-
-        static AutoResetEvent autoEvent1 = new AutoResetEvent(false);
-        static AutoResetEvent autoEvent2 = new AutoResetEvent(false);
-
+        // json classes to handles packing and reciving map data
         [JsonObject]
         public class city
         {
@@ -126,18 +108,16 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         }
 
-        public int gridWidth = 32;  // Number of hexagons per row
-        public int gridHeight = 64;
+        // list of cities
+        
         List<city> citylist = new List<city>();
 
-        string bannedlettersS = ".!@#$%^&*()+=-`~[]{}|;':,./<>?";
+        // variables for handeling city name generation
 
+        string bannedlettersS = ".!@#$%^&*()+=-`~[]{}|;':,./<>?";
         public char[] bannedletters;
 
-        public delegate void ptp1();
-
-
-
+        // variable for race condition handeling
         public bool booted = false;
 
         // Mainline
@@ -153,15 +133,20 @@ namespace TS_PEACE_Client.Windows.Game_windows
             Timertick2();
             Timertick3();
             Timertick4();
-            MainWindow_Loaded();
-            Task.Run(Reboottimer);
+            HexagonStart();
             bannedletters = bannedlettersS.ToCharArray();
+            // run reboottimer in seperate thread
+            Task.Run(Reboottimer);
+            
 
-
+            // pick team hexes 
             pickingTeam1points();
             pickingTeam2points();
 
+            // set booted race condition variable to true
             booted = true;
+
+            // setup final things after succcessful boot
 
             SetclickandName();
             Setuptooltips();
@@ -198,34 +183,17 @@ namespace TS_PEACE_Client.Windows.Game_windows
             connection.Reconnecting += error =>
             {
                 Debug.Assert(connection.State == HubConnectionState.Reconnecting);
-
-                //reconnect();
-
                 return Task.CompletedTask;
             };
             connection.Reconnected += connectionId =>
             {
                 Debug.Assert(connection.State == HubConnectionState.Connected);
-
-                //Reconnected();
-
                 return Task.CompletedTask;
             };
-
+            // check other uses connected to server
             connectionsolidify();
         }
 
-        private void Reconnected()
-        {
-            this.Dispatcher.Invoke(() =>
-            {
-                main_grid.Children.Remove(main_grid.FindName("scrim") as Rectangle);
-                main_grid.Children.Remove(main_grid.FindName("Reconnectinglabel") as Label);
-                main_grid.Children.Remove(main_grid.FindName("Ellipse1") as Ellipse);
-                main_grid.Children.Remove(main_grid.FindName("Ellipse2") as Ellipse);
-                main_grid.Children.Remove(main_grid.FindName("Ellipse3") as Ellipse);
-            });
-        }
 
         //signal R Methods
         public async ValueTask DisposeAsync()
@@ -249,6 +217,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public async Task Reboottimer()
         {
+            // create timer, if timer runs out, and booted = false, reboot
             TimeSpan boottimer = new TimeSpan(0, 0, 0, 30);
             while (boottimer.TotalSeconds > 0)
             {
@@ -333,9 +302,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public void setuparray()
         {
+            // set up array for map
             IEnumerable<Polygon> Circle = map.Children.OfType<Polygon>();
-
-
 
             foreach (var c in Circle)
             {
@@ -346,15 +314,9 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 int xave = (int)Canvas.GetLeft(c);
                 int yave = (int)Canvas.GetTop(c);
 
-
-
                 if (c.Uid == "2")
                 {
                     ownerout = "Team2";
-
-
-
-
                     citylist.Add(new city { name = c.Name, x = xave, y = yave, owner = ownerout, ID = (int)c.Tag });
 
                 }
@@ -375,6 +337,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public void Setuptooltips()
         {
+            // set up tooltips for cities
             IEnumerable<Polygon> Hexs = map.Children.OfType<Polygon>();
             foreach (var city in Hexs)
             {
@@ -383,14 +346,9 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     TextBlock text = new TextBlock();
 
                     text.FontFamily = new FontFamily("Avara");
-
                     text.FontSize = 18;
-
-
                     text.HorizontalAlignment = HorizontalAlignment.Center;
-
                     text.TextWrapping = TextWrapping.Wrap;
-
                     text.Text = city.Name;
 
                     ToolTip tootip = new ToolTip();
@@ -680,10 +638,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
             if (message_textbox.Text == "Team:Team1")
             {
                 Selfuser = "Team1";
-
                 SetcolorTeam1();
-
-                //path145.Stroke = OwnLand;
                 message_textbox.Text = "team1 has been set";
                 try
                 {
@@ -701,9 +656,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 Selfuser = "Team2";
 
                 SetcolorTeam2();
-
-
-
 
                 message_textbox.Text = "team2 has been set";
                 try
@@ -737,6 +689,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         private void SetcolorTeam1()
         {
+            // set colors to team 1 color profile
             IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
 
             foreach (var c in citylist)
@@ -766,6 +719,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         private void SetcolorTeam2()
         {
+            // set colors to team 2 color profile
             IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
 
             foreach (var c in citylist)
@@ -950,10 +904,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     int attaknum = 1;
                     foreach (string city in incomAttack)
                     {
-
-
-
-
                         this.Dispatcher.Invoke(() =>
                         {
                             TextBlock tb1 = new TextBlock();
@@ -1241,7 +1191,10 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         private void curvedanimatev3(string attacker, string hitcityin, int attacknum, string Method)
         {
-
+            // get the citys involved in the attack
+            // get the polygon objects for the citys
+            // get the x and y coordinates for the citys
+            // Create and animate a line between the citys
             IEnumerable<Polygon> Hexs = map.Children.OfType<Polygon>();
 
             List<city> randomcity = new List<city>();
@@ -1356,11 +1309,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     pathFigure2.StartPoint = new Point(x1, y1 + 10);
                     pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2 + 10), true));
                 }
-
-
-
-
-
             }
             else if (ydif > xdif)
             {
@@ -1407,13 +1355,9 @@ namespace TS_PEACE_Client.Windows.Game_windows
             }
 
             pathGeometry.Figures.Add(pathFigure);
-
             path.Data = pathGeometry;
-
             Animationpath.Figures.Add(pathFigure2);
-
             path2.Data = Animationpath;
-
 
             RotateTransform animatedRotateTransform = new RotateTransform();
             TranslateTransform animatedTranslateTransform = new TranslateTransform();
@@ -1626,10 +1570,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
         }
 
 
-        // Hexagon stuff
+        // Hexagon Methods
 
-        private void MainWindow_Loaded()
+        private void HexagonStart()
         {
+            // create a hexagon grid
             int gridWidth = 32;  // Number of hexagons per row
             int gridHeight = 64; // Number of hexagons per column
 
@@ -1697,6 +1642,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         private Polygon CreateHexagon(double size)
         {
+            // create a polygon in the shape of a hexagon
             var hexagon = new Polygon();
             hexagon.Stroke = Brushes.Black;
             hexagon.StrokeThickness = 2;
@@ -1715,6 +1661,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public async void pickingTeam2points()
         {
+            // pick a random hexagon and propergate outwards to create a teamlandmass for team 2
             this.Dispatcher.Invoke(() =>
             {
                 IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
@@ -1946,6 +1893,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public async void pickingTeam1points()
         {
+            // pick a random hex and propergate outwards for team 1 landmass
             this.Dispatcher.Invoke(() =>
             {
                 IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
@@ -2147,6 +2095,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         int CalculateRow(int gridWidth, int gridHeight, int hexagonIndex)
         {
+            // Calculate the row of the hexagon based on its id
             int totalColumns = gridWidth;
             int totalRows = (gridHeight + 1) * 2 - 1;
             int row = hexagonIndex / totalColumns;
@@ -2166,6 +2115,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         private void SetclickandName()
         {
+            // Set the click event for each hexagon
+            // generate name for each hexagon
             foreach (int city in team2landmass)
             {
 
@@ -2267,8 +2218,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
             }
 
         }
+
+        // sending map method
         private async void packmap()
         {
+            // pack map into a list of citytosend, send to server across 4 packets
             List<citytosend> mappacking = new List<citytosend>();
             List<citytosend> mappacking1q = new List<citytosend>();
             List<citytosend> mappacking2q = new List<citytosend>();
@@ -2359,9 +2313,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         }
 
+        // syncing map and handling connection changes methods
 
         public void Syncmap1(string incommingmapsync)
         {
+            // unpack map from list of citytosend, update map, show sync screen
             this.Dispatcher.Invoke(() =>
             {
                 Showsyncscreen();
@@ -2401,6 +2357,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
         }
         public void Syncmap2(string incommingmapsync)
         {
+            // unpack map from list of citytosend, update map
             this.Dispatcher.Invoke(() =>
             {
                 List<citytosend> cities = JsonConvert.DeserializeObject<List<citytosend>>(incommingmapsync);
@@ -2438,6 +2395,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
         }
         public void Syncmap3(string incommingmapsync)
         {
+            // unpack map from list of citytosend, update map
             this.Dispatcher.Invoke(() =>
             {
                 List<citytosend> cities = JsonConvert.DeserializeObject<List<citytosend>>(incommingmapsync);
@@ -2475,6 +2433,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
         }
         public void Syncmap4(string incommingmapsync)
         {
+            // unpack map from list of citytosend, update map, remove sync screen
             this.Dispatcher.Invoke(() =>
             {
                 List<citytosend> cities = JsonConvert.DeserializeObject<List<citytosend>>(incommingmapsync);
@@ -2524,6 +2483,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public void Setclickaftersync()
         {
+            // set click event for all hexes after successful sync
             this.Dispatcher.Invoke(() =>
             {
                 IEnumerable<Polygon> hex = map.Children.OfType<Polygon>();
@@ -2562,6 +2522,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public async void Showsyncscreen()
         {
+            // show sync screen
             this.Dispatcher.Invoke(() =>
             {
                 
@@ -2593,12 +2554,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     UnregisterName("Ellipse31");
                 }
 
-
-
-                
-                
-                
-
                 Rectangle scrim = new Rectangle();
 
                 scrim.Fill = Brushes.Black;
@@ -2621,8 +2576,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 Grid.SetColumnSpan(text, 3);
                 Grid.SetRow(text, 0);
                 Grid.SetZIndex(text, 41);
-
-
 
                 Ellipse ellipse1 = new Ellipse();
                 ellipse1.Fill = Brushes.White;
@@ -2718,6 +2671,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public async void Removesyncscreen()
         {
+            // remove sync screen
             this.Dispatcher.Invoke(() =>
             {
                 
@@ -2736,11 +2690,13 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         private void Syncmapbutton_Click(object sender, RoutedEventArgs e)
         {
+            // handle sync map button click
             packmap();
         }
 
         private void Exitbutton_Click(object sender, RoutedEventArgs e)
         {
+            // exit button click
             MainWindow win = new MainWindow();
             win.Show();
             this.Close();
@@ -2748,6 +2704,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public void reconnect()
         {
+            // reconnect to server
             this.Dispatcher.Invoke(() =>
             {
                 Rectangle scrim = new Rectangle();
@@ -2864,6 +2821,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public async void connectionsolidify()
         {
+            // solidify connection, handle cannot connect and waiting for other players
             this.Dispatcher.Invoke(() =>
             {
                 Rectangle scrim = new Rectangle();
@@ -3053,13 +3011,14 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public async Task Syncrequest()
         {
-            
+            // handle sync request from server
             Syncmapbutton_Click(null, null);
 
         }
 
         public async Task LoneClient()
         {
+            // wait for second player to join
             this.Dispatcher.Invoke(() =>
             {
                 Rectangle scrim = new Rectangle();

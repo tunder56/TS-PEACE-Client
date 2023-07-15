@@ -24,7 +24,10 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
     /// </summary>
     public partial class Tutorialpart1 : Window
     {
+        // tutorial part variable
         int tutorialpart = 1;
+        
+        // city class
         public class city
         {
             public string name;
@@ -32,19 +35,23 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             public int y;
             public string owner;
         }
-        List<city> citylist = new List<city>();
+        // variables to handle username and colors
+        
         string Selfuser = "Team1";
         SolidColorBrush OwnLand = new SolidColorBrush();
         SolidColorBrush Elseland = new SolidColorBrush();
         SolidColorBrush TargetedBorder = new SolidColorBrush();
         SolidColorBrush Untargeted = new SolidColorBrush();
+
+        //initalise city list
+        List<city> citylist = new List<city>();
+
+        // main line code
         public Tutorialpart1()
         {
             InitializeComponent();
 
-
-
-           
+            // set colors
 
             OwnLand = new SolidColorBrush(Color.FromRgb(90, 105, 236));
             TargetedBorder.Color = Color.FromArgb(80, 255, 178, 178);
@@ -55,13 +62,12 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             path137.Stroke = Elseland;
             path141.Stroke = Elseland;
 
-
-            
-
             path139.Stroke = OwnLand;
             path143.Stroke = OwnLand;
             path147.Stroke = OwnLand;
             path145.Stroke = OwnLand;
+
+            // get all citys on map and add them to the city list with owners and locations
             IEnumerable<Ellipse> Circle = map.Children.OfType<Ellipse>();
 
             foreach (var c in Circle)
@@ -85,20 +91,7 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
 
         }
-        // map and targeting
-
-
-
-
-        // if clicked on own landmass
-        // no , that is one of your cites try again 
-
-        // since you cliked on the city, there is a targeting ring around it, and its name appears in the targeted cites list
-
-        // clicking the city again will remove the city from targeting, give it a go
-
-
-        // that is how you target citys in the simulation
+        //methods to handle tutorial parts
 
 
         public void Part1()
@@ -177,6 +170,7 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             });
         }
 
+        // modified map click method to handle tutorial
 
         public void map_click(object sender, RoutedEventArgs e)
         {
@@ -253,6 +247,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
 
         }
+
+        // methods to handle button clicks
          void Finsh()
         {
             Window win = new Tutorialpart2();

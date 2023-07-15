@@ -1,24 +1,16 @@
 ﻿
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Xml.Xsl;
 
 
 namespace TS_PEACE_Client.Windows.Game_windows
@@ -80,23 +72,28 @@ namespace TS_PEACE_Client.Windows.Game_windows
             public string owner;
         }
 
+        // custom routed event
         public static readonly RoutedEvent Clickteam = EventManager.RegisterRoutedEvent(
         name: "Click",
         routingStrategy: RoutingStrategy.Bubble,
         handlerType: typeof(RoutedEventHandler),
         ownerType: typeof(Button));
 
+        // initalsing city list
         List<city> citylist = new List<city>();
 
+        // mainline code
         public Bunkerscontrol()
         {
             InitializeComponent();
+            // run setup and set all timers to tick
             setup();
             Timertick1();
             Timertick2();
             Timertick3();
             Timertick4();
 
+            // set attack names
             Attack1_name.Text = GlobalSettings.Default.Attack1name;
             Attack2_name.Text = GlobalSettings.Default.Attack2name;
             Attack3_name.Text = GlobalSettings.Default.Attack3name;
@@ -112,13 +109,12 @@ namespace TS_PEACE_Client.Windows.Game_windows
             connection.On<string, string>(methodName: "reciveMessage", (user, message) => reciveMessage(user, message));
             connection.On<List<string>, string, string>(methodName: "incommingattack", (incomAttack, Attacker, Method) => incommingattack(incomAttack, Attacker, Method));
             connection.StartAsync();
-            
-            
 
         }
 
         private void setup()
         {
+            // call all setup functions
             Timersetup();
             setuparray();
             Screenstatesetup();
@@ -128,6 +124,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public void setuparray()
         {
+            // setup city array
             IEnumerable<Ellipse> Circle = map.Children.OfType<Ellipse>();
 
             foreach (var c in Circle)
@@ -147,6 +144,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         public void Setuptooltips()
         {
+            // create and apply tooltips to all cities
             IEnumerable<Ellipse> Circle = map.Children.OfType<Ellipse>();
             foreach (var city in Circle)
             {
@@ -380,7 +378,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
         }
 
 
-        // targeting methods
+        // targeting and attack methods
 
         private void map_click(object sender, RoutedEventArgs e)
         {
@@ -406,9 +404,10 @@ namespace TS_PEACE_Client.Windows.Game_windows
             }
         }
 
-
+        
         private async void Send_attack(object sender, RoutedEventArgs e)
         {
+            // package up the attack and send to server
             if (currentattack == "attack1" && Attack1_status == true)
             {
                 List<string> sendingattack = new List<string>();
@@ -428,7 +427,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 {
                     messagedisplay_box.Items.Insert(0, ex.Message);
                 }
-
 
                 sendingattack.Clear();
                 Targeting_list_display.Items.Clear();
@@ -453,7 +451,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 {
                     messagedisplay_box.Items.Insert(0, ex.Message);
                 }
-
 
                 sendingattack.Clear();
                 Targeting_list_display.Items.Clear();
@@ -748,8 +745,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         hitting.Fill = Attack1Hitfill;
                     });
 
-
-
                     this.Dispatcher.Invoke(() =>
                     {
                         TextBlock toinsert = new TextBlock();
@@ -780,8 +775,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         var hitting = (Ellipse)FindName(city);
                         hitting.Fill = Attack2Hitfill;
                     });
-
-
 
                     this.Dispatcher.Invoke(() =>
                     {
@@ -814,8 +807,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         hitting.Fill = Attack3Hitfill;
                     });
 
-
-
                     this.Dispatcher.Invoke(() =>
                     {
                         TextBlock toinsert = new TextBlock();
@@ -846,8 +837,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         var hitting = (Ellipse)FindName(city);
                         hitting.Fill = Attack4Hitfill;
                     });
-
-
 
                     this.Dispatcher.Invoke(() =>
                     {
@@ -956,23 +945,18 @@ namespace TS_PEACE_Client.Windows.Game_windows
             }
         }
 
-        // animation methods
+        // animation method
 
         private void animateattack(string attacker, string hitcityin, int attacknum)
         {
-
             List<city> randomcity = new List<city>();
             randomcity.AddRange(citylist.Where(x => x.owner == attacker));
 
             Random random = new Random();
 
-
             city Hitcity = citylist.Find(x => x.name == hitcityin);
 
-
             var cityfound = randomcity[random.Next(randomcity.Count)];
-
-
 
             bool movingLtoRight = false;
             bool movingUtoDown = false;
@@ -1000,21 +984,14 @@ namespace TS_PEACE_Client.Windows.Game_windows
             RectangleGeometry Clippingmask = new RectangleGeometry();
             Clippingmask.Rect = new Rect(0, 0, 150, 160);
 
-
-
             DropShadowEffect dropShadow = new DropShadowEffect();
             dropShadow.Color = Color.FromRgb(100, 100, 100);
             dropShadow.BlurRadius = 2;
 
-
-
             Rectangle rectangle = new Rectangle();
-
             rectangle.Width = 50;
             rectangle.Height = 50;
-
             rectangle.Stroke = Brushes.Blue;
-
 
             Path path = new Path();
             path.Stroke = Brushes.Black;
@@ -1069,8 +1046,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 {
                     ymidpointinsurt = midpointy - 100;
                 }
-
-
                 if (movingLtoRight)
                 {
                     pathFigure.Segments.Add(new QuadraticBezierSegment(new Point(midpointx, ymidpointinsurt), new Point(x2 + 5, y2 + 5), true));
@@ -1095,11 +1070,6 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                     pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2 + 10), true));
                 }
-
-
-
-
-
             }
             else if (ydif > xdif)
             {
@@ -1149,32 +1119,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
                     pathFigure2.Segments.Add(new LineSegment(new Point(x2, y2), true));
                 }
 
-
-
-
-
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             pathGeometry.Figures.Add(pathFigure);
-
             path.Data = pathGeometry;
-
             Animationpath.Figures.Add(pathFigure2);
             path2.Data = Animationpath;
-
 
             RotateTransform animatedRotateTransform =
              new RotateTransform();
@@ -1195,13 +1144,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
             tGroup.Children.Add(animatedTranslateTransform);
 
             Clippingmask.Transform = tGroup;
-
             rectangle.RenderTransform = tGroup;
 
             PathGeometry animationpath = Animationpath;
-
-
             DoubleAnimationUsingPath angleAnimation = new DoubleAnimationUsingPath();
+
             angleAnimation.PathGeometry = animationpath;
             angleAnimation.Duration = TimeSpan.FromSeconds(3);
             angleAnimation.Source = PathAnimationSource.Angle;
@@ -1210,15 +1157,12 @@ namespace TS_PEACE_Client.Windows.Game_windows
             // of the RotateTransform named "AnimatedRotateTransform".
             Storyboard.SetTargetName(angleAnimation, rotateTransformName);
             Storyboard.SetTargetProperty(angleAnimation, new PropertyPath(RotateTransform.AngleProperty));
-
-
             DoubleAnimationUsingPath translateXAnimation =
                 new DoubleAnimationUsingPath();
+
             translateXAnimation.PathGeometry = animationpath;
             translateXAnimation.Duration = TimeSpan.FromSeconds(3);
-
             translateXAnimation.Source = PathAnimationSource.X;
-
 
             Storyboard.SetTargetName(translateXAnimation, translateTransformname);
             Storyboard.SetTargetProperty(translateXAnimation,
@@ -1228,20 +1172,13 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 new DoubleAnimationUsingPath();
             translateYAnimation.PathGeometry = animationpath;
             translateYAnimation.Duration = TimeSpan.FromSeconds(3);
-
-
-
             translateYAnimation.Source = PathAnimationSource.Y;
 
             Storyboard.SetTargetName(translateYAnimation, translateTransformname);
             Storyboard.SetTargetProperty(translateYAnimation,
                 new PropertyPath(TranslateTransform.YProperty));
 
-
-
             Storyboard pathAnimationStoryboard = new Storyboard();
-
-
 
             RectAnimation rectAnimation = new RectAnimation();
             rectAnimation.From = new Rect(0, 0, 0, 160);
@@ -1266,22 +1203,15 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
             Storyboard closingtime = new Storyboard();
 
-
             closingtime.Children.Add(closing);
-
-
             path.Clip = Clippingmask;
             map.Children.Add(path);
-            //map.Children.Add(rectangle);
-            //map.Children.Add(path2);
-
-
+            
             path.Loaded += delegate (object sender, RoutedEventArgs e)
             {
                 // Start the storyboard.
                 pathAnimationStoryboard.Begin(this);
             };
-
 
             pathAnimationStoryboard.Completed += (s, e) =>
             {
@@ -1292,15 +1222,13 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 UnregisterName(translateTransformname);
             };
 
-
-
-
-
-
         }
+
+        // exit method
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
+            // on click exit
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();

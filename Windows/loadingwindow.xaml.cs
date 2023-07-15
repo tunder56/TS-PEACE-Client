@@ -21,6 +21,7 @@ namespace TS_PEACE_Client.Windows
     {
         public loadingwindow()
         {
+            // start page
             InitializeComponent();
         }
     }

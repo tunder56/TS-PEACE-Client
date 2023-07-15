@@ -27,6 +27,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
         bool Attack3_status = false;
         bool Attack4_status = false;
         int tutorialpart = 1;
+
+        // city class
         public class city
         {
             public string name;
@@ -34,7 +36,11 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             public int y;
             public string owner;
         }
+
+        //initalise city list
         List<city> citylist = new List<city>();
+
+        // variables to handle username and colors
         string Selfuser = "Team1";
         SolidColorBrush Disabledfill = new SolidColorBrush();
         SolidColorBrush Disabledfilltext = new SolidColorBrush();
@@ -50,49 +56,20 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
         SolidColorBrush OwnLand = new SolidColorBrush();
         SolidColorBrush Elseland = new SolidColorBrush();
 
+        // timer variables
         TimeSpan Attak1_timerVar;
         TimeSpan Attak2_timerVar;
         TimeSpan Attak3_timerVar;
         TimeSpan Attak4_timerVar;
+
+        // mainline code
         public Tutorialpart2()
         {
             InitializeComponent();
 
-            // attack selection 
-
-            // once a city is targeted, it can be attacked.
-
-            // using what you learned before, target an enemy city
-
-            // if clicked own city
-            // that is not a enemy city, try again
-
-            // good job,
-
-            // now see the attack selection boxes, they are to the right of the targeting list and below the map
-
-            // In order for an attack to be selected, it needs to be alavlible, this is shown by the color of the box 
-
-            // red == unavailbe
-            // green == ready to use
 
 
-            // select a Green / ready to use attack
-
-            // if red attack selected
-            // that attack is not avalibe , slect a green attack
-
-            // good job , this is how you select an attack
-
-            // to lanch an attack, click the attack button to the left of the attack selection buttons
-
-            // lanch an attack now!!
-
-            InitializeComponent();
-
-
-
-
+            // set colors
 
             OwnLand = new SolidColorBrush(Color.FromRgb(90, 105, 236));
             TargetedBorder.Color = Color.FromArgb(80, 255, 178, 178);
@@ -112,6 +89,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             path143.Stroke = OwnLand;
             path147.Stroke = OwnLand;
             path145.Stroke = OwnLand;
+
+            // get all citys on map and add them to the city list with owners and locations
             IEnumerable<Ellipse> Circle = map.Children.OfType<Ellipse>();
 
             foreach (var c in Circle)
@@ -127,6 +106,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
                 }
                 citylist.Add(new city { name = c.Name, x = Convert.ToInt32(c.GetValue(Canvas.LeftProperty)), y = Convert.ToInt32(c.GetValue(Canvas.TopProperty)), owner = ownerout });
             }
+
+            // set up timer
             setup();
             Timertick1();
             Part1();
@@ -136,20 +117,7 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
 
         }
-        // map and targeting
 
-
-
-
-        // if clicked on own landmass
-        // no , that is one of your cites try again 
-
-        // since you cliked on the city, there is a targeting ring around it, and its name appears in the targeted cites list
-
-        // clicking the city again will remove the city from targeting, give it a go
-
-
-        // that is how you target citys in the simulation
         private void Coloursetup()
         {
             // Modify Global Colours
@@ -186,29 +154,6 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
         }
 
-        private void Timercheck()
-        {
-            // check if timers are above zero and if they are active, if so make sure they tick
-
-            if (Attak1_timerVar > new TimeSpan(00, 00, 00) && Attack1_status == true)
-            {
-                Timertick1();
-
-            }
-            if (Attak2_timerVar > new TimeSpan(00, 00, 00) && Attack2_status == true)
-            {
-                Timertick2();
-            }
-            if (Attak3_timerVar > new TimeSpan(00, 00, 00) && Attack3_status == true)
-            {
-                Timertick3();
-            }
-            if (Attak4_timerVar > new TimeSpan(00, 00, 00) && Attack4_status == true)
-            {
-                Timertick4();
-            }
-        }
-
         public async Task Timertick1()
         {
             // Disable attack 1 and set attack timer 1 to tick, when zero re-enable
@@ -242,105 +187,6 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             Attack1_status = true;
         }
 
-        public async Task Timertick2()
-        {
-            // Disable attack 2 and set attack timer 2 to tick, when zero re-enable
-
-            Attack2_status = false;
-            this.Dispatcher.Invoke(() =>
-            {
-                Attack2_box.Fill = Disabledfill;
-                Attack2_name.Foreground = Disabledfilltext;
-                Attack2_timer.Foreground = Disabledfilltext;
-            });
-
-
-            while (Attak2_timerVar > new TimeSpan())
-            {
-                await Task.Delay(1000);
-                Attak2_timerVar = Attak2_timerVar.Subtract(new TimeSpan(0, 0, 1));
-                this.Dispatcher.Invoke(() =>
-                {
-                    this.Attack2_timer.Text = Attak2_timerVar.ToString();
-                });
-
-            }
-            this.Dispatcher.Invoke(() =>
-            {
-                Attack2_box.Fill = Activefill;
-                Attack2_name.Foreground = ActivefillSelected;
-                Attack2_timer.Foreground = ActivefillSelected;
-            });
-
-            Attack2_status = true;
-        }
-
-        public async Task Timertick3()
-        {
-            // Disable attack 3 and set attack timer 3 to tick, when zero re-enable
-
-            Attack3_status = false;
-            this.Dispatcher.Invoke(() =>
-            {
-                Attack3_box.Fill = Disabledfill;
-                Attack3_name.Foreground = Disabledfilltext;
-                Attack3_timer.Foreground = Disabledfilltext;
-            });
-
-
-            while (Attak3_timerVar > new TimeSpan())
-            {
-                await Task.Delay(1000);
-                Attak3_timerVar = Attak3_timerVar.Subtract(new TimeSpan(0, 0, 1));
-                this.Dispatcher.Invoke(() =>
-                {
-                    this.Attack3_timer.Text = Attak3_timerVar.ToString();
-                });
-
-            }
-            this.Dispatcher.Invoke(() =>
-            {
-                Attack3_box.Fill = Activefill;
-                Attack3_name.Foreground = ActivefillSelected;
-                Attack3_timer.Foreground = ActivefillSelected;
-            });
-
-            Attack3_status = true;
-        }
-
-        public async Task Timertick4()
-        {
-            // Disable attack 4 and set attack timer 4 to tick, when zero re-enable
-
-            Attack4_status = false;
-            this.Dispatcher.Invoke(() =>
-            {
-                Attack4_box.Fill = Disabledfill;
-                Attack4_name.Foreground = Disabledfilltext;
-                Attack4_timer.Foreground = Disabledfilltext;
-            });
-
-
-            while (Attak4_timerVar > new TimeSpan())
-            {
-                await Task.Delay(1000);
-                Attak4_timerVar = Attak4_timerVar.Subtract(new TimeSpan(0, 0, 1));
-                this.Dispatcher.Invoke(() =>
-                {
-                    this.Attack4_timer.Text = Attak4_timerVar.ToString();
-                });
-
-            }
-            this.Dispatcher.Invoke(() =>
-            {
-                Attack4_box.Fill = Activefill;
-                Attack4_name.Foreground = ActivefillSelected;
-                Attack4_timer.Foreground = ActivefillSelected;
-            });
-
-            Attack4_status = true;
-        }
-
         private void setup()
         {
             Coloursetup();
@@ -361,6 +207,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             this.Attack4_timer.Text = Attak4_timerVar.ToString();
         }
 
+
+        //methods to handle tutorial parts
         public void Part1()
         {
             this.Dispatcher.Invoke(() =>
@@ -442,7 +290,7 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
             });
         }
 
-
+        // modified map click method to handle tutorial
         public void map_click(object sender, RoutedEventArgs e)
         {
             // get the name of the ellipse clicked, add to targeting list, unless allready in list then remove
@@ -509,6 +357,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
 
         }
+
+        // methods to handle button clicks
         public void Finsh()
         {
             Window win = new Tutorialpart3();

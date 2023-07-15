@@ -24,6 +24,7 @@ namespace TS_PEACE_Client
 
         private void Bunkers(object sender, RoutedEventArgs e)
         {
+            // open bunkers window and close self
             Bunkerscontrol win = new Bunkerscontrol();
             win.Show();
             this.Close();
@@ -31,6 +32,9 @@ namespace TS_PEACE_Client
 
         private void RandomBunkers(object sender, RoutedEventArgs e)
         {
+            // start loading window in another thread
+            // open random bunkers window
+            // close loading window and self
             loading l = new loading();
 
             Thread newWindowThread = new Thread(new ThreadStart(l.ThreadStartingPoint));
@@ -50,6 +54,7 @@ namespace TS_PEACE_Client
 
         private void Settings(object sender, RoutedEventArgs e)
         {
+            // open settings window and close self
             Settingswindow win = new Settingswindow();
             win.Show();
             this.Close();
@@ -57,6 +62,7 @@ namespace TS_PEACE_Client
 
         private void Modportal(object sender, RoutedEventArgs e)
         {
+            // open modportal in browser
             var uri = "https://terrasymposium.com/";
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
@@ -66,6 +72,7 @@ namespace TS_PEACE_Client
 
         private void Tutorial(object sender, RoutedEventArgs e)
         {
+            // open tutorial window and close self
             Tutorialpart1 win = new Tutorialpart1();
             win.Show();
             this.Close();
@@ -73,6 +80,7 @@ namespace TS_PEACE_Client
 
         class loading
         {
+            // class to handel loading window thread
             public CancellationToken token;
             public void ThreadStartingPoint()
             {

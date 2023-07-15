@@ -22,10 +22,12 @@ namespace TS_PEACE_Client.Windows.Settings_windows
     /// </summary>
     public partial class Settingswindow : Window
     {
+        // main line code
         public Settingswindow()
         {
             InitializeComponent();
 
+            // get current setting colors and set them as preselcted
             getcurrentcolors();
 
             Attack1rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GlobalSettings.Default.Attack1color.A, GlobalSettings.Default.Attack1color.R, GlobalSettings.Default.Attack1color.G, GlobalSettings.Default.Attack1color.B));
@@ -52,6 +54,7 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
         private void Setcombolists()
         {
+            // add colors to comboboxes
             Attack1box.Items.Add("Default");
             Attack2box.Items.Add("Default");
             Attack3box.Items.Add("Default");
@@ -74,6 +77,7 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
         private void getcurrentcolors()
         {
+            // get current colors and set them as selected
             if(GlobalSettings.Default.Attack1color == Color.FromArgb(255, 240, 201, 135))
             {
                 Attack1box.SelectedItem = "Default";
@@ -111,6 +115,7 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
         private void Savecurrentcolors()
         {
+            // save current colors
             if(Attack1box.SelectedItem == "Default") 
             { 
                 
@@ -166,6 +171,7 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+            // exit
             MainWindow win = new MainWindow();
             win.Show();
             this.Close();
@@ -173,6 +179,7 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
         private void combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // change color of rectangle when combobox is changed
             ComboBox cb = sender as ComboBox;
             if(cb.Name == "Attack1box")
             {
@@ -235,11 +242,15 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // save button
             Savecurrentcolors();
         }
 
+        // methods to handle when the text is changed in the textboxes
+
         private void Attack4name_TextChanged(object sender, TextChangedEventArgs e)
         {
+           
             GlobalSettings.Default.Attack4name = Attack4name.Text;
         }
 

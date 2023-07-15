@@ -29,14 +29,15 @@
             <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition Height=".2*"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--Misc Buttons and labels-->
 
         <Button Content="Exit" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="8" Grid.Row="0" Width="80" Height="30" Click="Exit"/>
         <Button Content="Save and apply" Grid.Column="7" Grid.Row="6" VerticalAlignment="Bottom" Width="100" HorizontalAlignment="Center" Height="30" Click="Button_Click"/>
         <Label Content="Settings"  VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontFamily="Avara" FontSize="40" Margin="0,26,0,0"/>
-
+        <!-- color chaging settings-->
         <Label Content="Colors" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"  Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="20" FontFamily="AUTHENTIC Sans 90" />
         
-        
+        <!--Grid to hold attck 1 color changing items-->
         <Grid x:Name="Attack1grid" Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -56,7 +57,7 @@
         <Rectangle x:Name="Attack1rec" Fill="Wheat" Grid.Column="1" Grid.Row="3"/>
 
 
-
+        <!--Grid to hold attack 2 color changing items-->
         <Grid x:Name="Attack2grid" Grid.Row="1" Grid.Column="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -75,7 +76,7 @@
         </Grid>
         <Rectangle x:Name="Attack2rec" Fill="Wheat" Grid.Column="3" Grid.Row="3"/>
 
-
+        <!--Grid to hold attack 3 color chaging items-->
         <Grid x:Name="Attack3grid" Grid.Row="1" Grid.Column="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -94,7 +95,7 @@
         </Grid>
         <Rectangle x:Name="Attack3rec" Fill="Wheat" Grid.Column="5" Grid.Row="3"/>
 
-
+        <!--Grid to hold attack 4 color changing items-->
         <Grid x:Name="Attack4grid" Grid.Row="1" Grid.Column="7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -112,9 +113,11 @@
             </ComboBox>
         </Grid>
         <Rectangle x:Name="Attack4rec" Fill="Wheat" Grid.Column="7" Grid.Row="3"/>
-
+        
+        <!--Attack name section-->
         <Label Content=" Attack Names" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="3" FontFamily="AUTHENTIC Sans 90" FontSize="20"/>
-
+        
+        <!--Gird to hold attack 1 name changing items-->
         <Grid x:Name="Attack1namegrid" Grid.Row="5" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.25*"></ColumnDefinition>
@@ -129,6 +132,7 @@
             <TextBox Name="Attack1name" Grid.Row="0" Grid.Column="1" FontFamily="AUTHENTIC Sans 90" TextChanged="Attack1name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25" ></TextBox>
         </Grid>
 
+        <!--Grid to hold attack 2 name changing items-->
         <Grid x:Name="Attack2namegrid" Grid.Row="5" Grid.Column="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.25*"></ColumnDefinition>
@@ -142,6 +146,8 @@
             <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
             <TextBox Name="Attack2name" Grid.Row="0" Grid.Column="1" FontFamily="AUTHENTIC Sans 90" TextChanged="Attack2name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
         </Grid>
+        
+        <!--Grid to hold attack 3 name changing items-->
         <Grid x:Name="Attack3namegrid" Grid.Row="5" Grid.Column="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.25*"></ColumnDefinition>
@@ -155,7 +161,9 @@
             <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
             <TextBox Name="Attack3name" Grid.Row="0" Grid.Column="1" FontFamily="AUTHENTIC Sans 90" TextChanged="Attack3name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
         </Grid>
-
+        
+        
+        <!--Grid to hold attack 4 name changing items-->
         <Grid x:Name="Attack4namegrid" Grid.Row="5" Grid.Column="7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.25*"></ColumnDefinition>

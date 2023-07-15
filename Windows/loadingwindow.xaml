@@ -8,6 +8,7 @@
         Title="loadingwindow" Height="450" Width="800"
         Background="DimGray"
         ResizeMode="NoResize">
+    <!--Grid to display loading text and loading bar-->
     <Grid>
 
         <Label Content="LOADING .... " FontFamily="Avara" FontSize="60" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="0,133,0,0" Foreground="Black" />

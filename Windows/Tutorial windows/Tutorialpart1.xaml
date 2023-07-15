@@ -165,23 +165,12 @@
                     <ColumnDefinition Width="0*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <!--<Rectangle x:Name="message_box" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3"  Stroke="Black"></Rectangle>-->
+                
 
                 <Label Name="message_title" Content="Tutorial 1" HorizontalContentAlignment="Center" FontSize="36" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="0,0,0,5" FontWeight="Bold" FontFamily="Avara" />
-                <!--<TextBox x:Name="message_textbox" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Enter your text here..."  FontSize="36"  KeyDown="entercheck" GotFocus="messegge_textbox_focus" LostFocus="message_textbox_LostFocus" Panel.ZIndex="1" FontFamily="AUTHENTIC Sans 60"/>
-                    <Button x:Name="messagesend_button" Grid.Column="1" Content="Send"   Grid.Row="2"  FontSize="30" FontWeight="Bold" Click="messagesend_button_Click" Panel.ZIndex="1" FontFamily="Avara Black"/>-->
+                
                 <ListBox x:Name="messagedisplay_box" HorizontalContentAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="AUTHENTIC Sans 90" Margin="0,73,0,0" Grid.RowSpan="2" >
-                    <!--<ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock
-                    Text="{Binding}"
-                    TextWrapping="Wrap"
-
-                    />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>-->
+                
                 </ListBox>
                 <Button Name="lastbutton" Content="Last"  HorizontalAlignment="Left" Height="78" Margin="163,3,0,0" VerticalAlignment="Top" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>
                 <Button x:Name="nextbutton" Content="Next"  HorizontalAlignment="Left" Height="78" Margin="328,4,0,0" VerticalAlignment="Top" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>

@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
+        <!--Inital Team set buttons and scrim-->
         <Rectangle Name="teamSet_background" Grid.ColumnSpan="3" Grid.RowSpan="4" Fill="Black" Opacity="0.775" Panel.ZIndex="2"></Rectangle>
 
         <Label Name="TeamSet_Label" Content="Select Your Team" Foreground="White" FontSize="100" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="3" FontFamily="Avara" ></Label>
@@ -31,8 +31,10 @@
         <Button Name="TeamSet_Button2" Grid.Row="1" Grid.Column="2" FontSize="80" Margin="0,0,140,0" Panel.ZIndex="3" FontFamily="AUTHENTIC Sans 60" Click="TeamSet_Button2_Click">Team 2</Button>
 
         <Button x:Name="Exitbutton" Content="Exit"  Grid.Column="2" Grid.Row="0" FontSize="30" FontFamily="avara" Click="Exitbutton_Click" Panel.ZIndex="50" Width="100" Height="70" VerticalAlignment="top" HorizontalAlignment="Right" ></Button>
-
+        <!--Map background-->
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Stroke="Black" />
+        
+        <!--Viewbox and canvas to hold map-->
         <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"  >
             <Canvas x:Name="map" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  Canvas.Left="0" Canvas.Top="0" HorizontalAlignment="Center" Width="983.6" Height="708.7" Panel.ZIndex="1" >
                 <Canvas.RenderTransform>
@@ -41,6 +43,7 @@
 
             </Canvas>
         </Viewbox>
+        <!--Grid to hold targeting items-->
         <Grid x:Name="targeting_grid" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.25*"></RowDefinition>
@@ -51,6 +54,7 @@
             <Rectangle   Grid.Row="0" Grid.RowSpan="2" Stroke="Black"  />
 
         </Grid>
+        <!--Gird to hold attacks and associated items-->
         <Grid x:Name="attak_grid" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -94,6 +98,7 @@
 
             <Button x:Name="sendattack_button" Grid.Column="2" Content="Attack" Grid.Row="0" Margin="24,52,40,10" Grid.RowSpan="3" Background="{x:Null}" Foreground="White" FontSize="25" BorderBrush="Black" Click="Send_attack" Panel.ZIndex="1" FontFamily="Avara Black"/>
         </Grid>
+        <!--Grid to hold messages and associated items-->
         <Grid x:Name="message_grid" Grid.Column="2" Grid.Row="0">
 
             <Grid.RowDefinitions>
@@ -114,24 +119,10 @@
             <TextBox x:Name="message_textbox" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Enter your text here..."  FontSize="36"  KeyDown="entercheck" GotFocus="messegge_textbox_focus" LostFocus="message_textbox_LostFocus" Panel.ZIndex="1" FontFamily="AUTHENTIC Sans 60"/>
             <Button x:Name="messagesend_button" Grid.Column="1" Content="Send"   Grid.Row="2"  FontSize="30" FontWeight="Bold" Click="messagesend_button_Click" Panel.ZIndex="1" FontFamily="Avara Black"/>
             <ListBox x:Name="messagedisplay_box" Grid.ColumnSpan="2" Grid.Row="1" HorizontalContentAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="AUTHENTIC Sans 90" >
-                <!--<ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock
-                    Text="{Binding}"
-                    TextWrapping="Wrap"
-
-                    />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>-->
             </ListBox>
-
-
-
-
         </Grid>
 
+        <!--Grid to hold the strike feed and associated items-->
         <Grid x:Name="strikefeed_grid" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"></RowDefinition>
