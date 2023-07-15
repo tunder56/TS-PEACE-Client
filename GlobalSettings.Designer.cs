@@ -13,11 +13,11 @@ namespace TS_PEACE_Client {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
-    public sealed partial class GSettings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class GlobalSettings : global::System.Configuration.ApplicationSettingsBase {
         
-        private static GSettings defaultInstance = ((GSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new GSettings())));
+        private static GlobalSettings defaultInstance = ((GlobalSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new GlobalSettings())));
         
-        public static GSettings Default {
+        public static GlobalSettings Default {
             get {
                 return defaultInstance;
             }
@@ -104,6 +104,54 @@ namespace TS_PEACE_Client {
             }
             set {
                 this["Targeted"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Attack 1")]
+        public string Attack1name {
+            get {
+                return ((string)(this["Attack1name"]));
+            }
+            set {
+                this["Attack1name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Attack 2")]
+        public string Attack2name {
+            get {
+                return ((string)(this["Attack2name"]));
+            }
+            set {
+                this["Attack2name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Attack 3")]
+        public string Attack3name {
+            get {
+                return ((string)(this["Attack3name"]));
+            }
+            set {
+                this["Attack3name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Attack 4")]
+        public string Attack4name {
+            get {
+                return ((string)(this["Attack4name"]));
+            }
+            set {
+                this["Attack4name"] = value;
             }
         }
     }

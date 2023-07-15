@@ -97,6 +97,11 @@ namespace TS_PEACE_Client.Windows.Game_windows
             Timertick3();
             Timertick4();
 
+            Attack1_name.Text = GlobalSettings.Default.Attack1name;
+            Attack2_name.Text = GlobalSettings.Default.Attack2name;
+            Attack3_name.Text = GlobalSettings.Default.Attack3name;
+            Attack4_name.Text = GlobalSettings.Default.Attack4name;
+
             // connect to Signal R hub
             connection = new HubConnectionBuilder()
                 .WithUrl(url: "https://21ftszzr-7190.aue.devtunnels.ms/Bunkershub")
@@ -196,12 +201,12 @@ namespace TS_PEACE_Client.Windows.Game_windows
             ActivefillSelectedBox.Color = Color.FromArgb(100, 255, 255, 255);
             TargetedBorder.Color = Color.FromArgb(80, 255, 178, 178);
             Untargeted.Color = Color.FromArgb(0, 0, 0, 0);
-            Attack1Hitfill.Color = Color.FromArgb(GSettings.Default.Attack1color.A, GSettings.Default.Attack1color.R, GSettings.Default.Attack1color.G, GSettings.Default.Attack1color.B);
-            Attack2Hitfill.Color = Color.FromArgb(GSettings.Default.Attack2color.A, GSettings.Default.Attack2color.R, GSettings.Default.Attack2color.G, GSettings.Default.Attack2color.B);
-            Attack3Hitfill.Color = Color.FromArgb(GSettings.Default.Attack3color.A, GSettings.Default.Attack3color.R, GSettings.Default.Attack3color.G, GSettings.Default.Attack3color.B);
-            Attack4Hitfill.Color = Color.FromArgb(GSettings.Default.Attack4color.A, GSettings.Default.Attack4color.R, GSettings.Default.Attack4color.G, GSettings.Default.Attack4color.B);
-            OwnLand = new SolidColorBrush(Color.FromArgb(GSettings.Default.Ownlandcolor.A, GSettings.Default.Ownlandcolor.R, GSettings.Default.Ownlandcolor.G, GSettings.Default.Ownlandcolor.B));
-            Elseland = new SolidColorBrush(Color.FromArgb(GSettings.Default.Elselandcolor.A, GSettings.Default.Elselandcolor.R, GSettings.Default.Elselandcolor.G, GSettings.Default.Elselandcolor.B));
+            Attack1Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack1color.A, GlobalSettings.Default.Attack1color.R, GlobalSettings.Default.Attack1color.G, GlobalSettings.Default.Attack1color.B);
+            Attack2Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack2color.A, GlobalSettings.Default.Attack2color.R, GlobalSettings.Default.Attack2color.G, GlobalSettings.Default.Attack2color.B);
+            Attack3Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack3color.A, GlobalSettings.Default.Attack3color.R, GlobalSettings.Default.Attack3color.G, GlobalSettings.Default.Attack3color.B);
+            Attack4Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack4color.A, GlobalSettings.Default.Attack4color.R, GlobalSettings.Default.Attack4color.G, GlobalSettings.Default.Attack4color.B);
+            OwnLand = new SolidColorBrush(Color.FromArgb(GlobalSettings.Default.Ownlandcolor.A, GlobalSettings.Default.Ownlandcolor.R, GlobalSettings.Default.Ownlandcolor.G, GlobalSettings.Default.Ownlandcolor.B));
+            Elseland = new SolidColorBrush(Color.FromArgb(GlobalSettings.Default.Elselandcolor.A, GlobalSettings.Default.Elselandcolor.R, GlobalSettings.Default.Elselandcolor.G, GlobalSettings.Default.Elselandcolor.B));
         }
 
         private void Timersetup()
@@ -758,7 +763,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack1_name}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -791,7 +796,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack2_name}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -824,7 +829,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack3_name}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -857,7 +862,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Method}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack4_name}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });

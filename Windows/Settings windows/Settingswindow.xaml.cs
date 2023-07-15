@@ -28,12 +28,20 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
             getcurrentcolors();
 
-            Attack1rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GSettings.Default.Attack1color.A, GSettings.Default.Attack1color.R, GSettings.Default.Attack1color.G, GSettings.Default.Attack1color.B));
-            Attack2rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GSettings.Default.Attack2color.A, GSettings.Default.Attack2color.R, GSettings.Default.Attack2color.G, GSettings.Default.Attack2color.B));
-            Attack3rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GSettings.Default.Attack3color.A, GSettings.Default.Attack3color.R, GSettings.Default.Attack3color.G, GSettings.Default.Attack3color.B));
-            Attack4rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GSettings.Default.Attack4color.A, GSettings.Default.Attack4color.R, GSettings.Default.Attack4color.G, GSettings.Default.Attack4color.B));
+            Attack1rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GlobalSettings.Default.Attack1color.A, GlobalSettings.Default.Attack1color.R, GlobalSettings.Default.Attack1color.G, GlobalSettings.Default.Attack1color.B));
+            Attack2rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GlobalSettings.Default.Attack2color.A, GlobalSettings.Default.Attack2color.R, GlobalSettings.Default.Attack2color.G, GlobalSettings.Default.Attack2color.B));
+            Attack3rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GlobalSettings.Default.Attack3color.A, GlobalSettings.Default.Attack3color.R, GlobalSettings.Default.Attack3color.G, GlobalSettings.Default.Attack3color.B));
+            Attack4rec.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(GlobalSettings.Default.Attack4color.A, GlobalSettings.Default.Attack4color.R, GlobalSettings.Default.Attack4color.G, GlobalSettings.Default.Attack4color.B));
 
             Setcombolists();
+
+            Attack1name.Text = GlobalSettings.Default.Attack1name;
+            Attack2name.Text = GlobalSettings.Default.Attack2name;
+            Attack3name.Text = GlobalSettings.Default.Attack3name;
+            Attack4name.Text = GlobalSettings.Default.Attack4name;
+
+
+
         }
 
 
@@ -66,37 +74,37 @@ namespace TS_PEACE_Client.Windows.Settings_windows
 
         private void getcurrentcolors()
         {
-            if(GSettings.Default.Attack1color == Color.FromArgb(255, 240, 201, 135))
+            if(GlobalSettings.Default.Attack1color == Color.FromArgb(255, 240, 201, 135))
             {
                 Attack1box.SelectedItem = "Default";
             }
             else
             {
-                Attack1box.SelectedItem = GSettings.Default.Attack1color.Name;
+                Attack1box.SelectedItem = GlobalSettings.Default.Attack1color.Name;
             }
-            if (GSettings.Default.Attack2color == Color.FromArgb(255, 97, 137, 133))
+            if (GlobalSettings.Default.Attack2color == Color.FromArgb(255, 97, 137, 133))
             {
                 Attack2box.SelectedItem = "Default";
             }
             else
             {
-                Attack2box.SelectedItem = GSettings.Default.Attack2color.Name;
+                Attack2box.SelectedItem = GlobalSettings.Default.Attack2color.Name;
             }
-            if (GSettings.Default.Attack3color == Color.FromArgb(255, 149, 125, 149))
+            if (GlobalSettings.Default.Attack3color == Color.FromArgb(255, 149, 125, 149))
             {
                 Attack3box.SelectedItem = "Default";
             }
             else
             {
-                Attack3box.SelectedItem = GSettings.Default.Attack3color.Name;
+                Attack3box.SelectedItem = GlobalSettings.Default.Attack3color.Name;
             }
-            if (GSettings.Default.Attack4color == Color.FromArgb(255, 239, 111, 108))
+            if (GlobalSettings.Default.Attack4color == Color.FromArgb(255, 239, 111, 108))
             {
                 Attack4box.SelectedItem = "Default";
             }
             else
             {
-                Attack4box.SelectedItem = GSettings.Default.Attack4color.Name;
+                Attack4box.SelectedItem = GlobalSettings.Default.Attack4color.Name;
             }
 
         }
@@ -106,39 +114,39 @@ namespace TS_PEACE_Client.Windows.Settings_windows
             if(Attack1box.SelectedItem == "Default") 
             { 
                 
-                GSettings.Default.Attack1color = Color.FromArgb(255, 240, 201, 135);
+                GlobalSettings.Default.Attack1color = Color.FromArgb(255, 240, 201, 135);
             }
             else if (Attack1box.SelectedItem != "Custom")
             {
 
-                GSettings.Default.Attack1color = Color.FromName(Attack1box.SelectedItem.ToString());
+                GlobalSettings.Default.Attack1color = Color.FromName(Attack1box.SelectedItem.ToString());
             }
             if (Attack2box.SelectedItem == "Default")
             {
 
-                GSettings.Default.Attack2color = Color.FromArgb(255, 97, 137, 133);
+                GlobalSettings.Default.Attack2color = Color.FromArgb(255, 97, 137, 133);
             }
             else if (Attack2box.SelectedItem != "Custom")
             {
-                GSettings.Default.Attack2color = Color.FromName(Attack2box.SelectedItem.ToString());
+                GlobalSettings.Default.Attack2color = Color.FromName(Attack2box.SelectedItem.ToString());
             }
             if (Attack3box.SelectedItem == "Default")
             {
 
-                GSettings.Default.Attack3color = Color.FromArgb(255, 149, 125, 149);
+                GlobalSettings.Default.Attack3color = Color.FromArgb(255, 149, 125, 149);
             }
             else if (Attack3box.SelectedItem != "Custom")
             {
-                GSettings.Default.Attack3color = Color.FromName(Attack3box.SelectedItem.ToString());
+                GlobalSettings.Default.Attack3color = Color.FromName(Attack3box.SelectedItem.ToString());
             }
             if (Attack4box.SelectedItem == "Default")
             {
 
-                GSettings.Default.Attack4color = Color.FromArgb(255, 239, 111, 108);
+                GlobalSettings.Default.Attack4color = Color.FromArgb(255, 239, 111, 108);
             }
             else if (Attack4box.SelectedItem != "Custom")
             {
-                GSettings.Default.Attack4color = Color.FromName(Attack4box.SelectedItem.ToString());
+                GlobalSettings.Default.Attack4color = Color.FromName(Attack4box.SelectedItem.ToString());
             }
 
             Label label = new Label();
@@ -153,7 +161,7 @@ namespace TS_PEACE_Client.Windows.Settings_windows
             label.HorizontalAlignment = HorizontalAlignment.Right;
 
             main_grid.Children.Add(label);
-            GSettings.Default.Save();
+            GlobalSettings.Default.Save();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -228,6 +236,26 @@ namespace TS_PEACE_Client.Windows.Settings_windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Savecurrentcolors();
+        }
+
+        private void Attack4name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GlobalSettings.Default.Attack4name = Attack4name.Text;
+        }
+
+        private void Attack3name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GlobalSettings.Default.Attack3name = Attack3name.Text;
+        }
+
+        private void Attack2name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GlobalSettings.Default.Attack2name = Attack2name.Text;
+        }
+
+        private void Attack1name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GlobalSettings.Default.Attack1name = Attack1name.Text;
         }
     }
 }

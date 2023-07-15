@@ -167,7 +167,10 @@ namespace TS_PEACE_Client.Windows.Game_windows
             Setuptooltips();
             setuparray();
 
-
+            Attack1_name.Text = GlobalSettings.Default.Attack1name;
+            Attack2_name.Text = GlobalSettings.Default.Attack2name;
+            Attack3_name.Text = GlobalSettings.Default.Attack3name;
+            Attack4_name.Text = GlobalSettings.Default.Attack4name;
 
 
 
@@ -293,12 +296,10 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
             Untargeted.Color = Color.FromArgb(100, 59, 56, 57);
             
-            Attack1Hitfill.Color = Color.FromArgb(GSettings.Default.Attack1color.A, GSettings.Default.Attack1color.R, GSettings.Default.Attack1color.G, GSettings.Default.Attack1color.B);
-            Attack2Hitfill.Color = Color.FromArgb(77, 1, 139, 0);
-
-            Attack3Hitfill.Color = Color.FromArgb(77, 141, 95, 0);
-
-            Attack4Hitfill.Color = Color.FromArgb(77, 161, 184, 14);
+            Attack1Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack1color.A, GlobalSettings.Default.Attack1color.R, GlobalSettings.Default.Attack1color.G, GlobalSettings.Default.Attack1color.B);
+            Attack2Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack2color.A, GlobalSettings.Default.Attack2color.R, GlobalSettings.Default.Attack2color.G, GlobalSettings.Default.Attack2color.B);
+            Attack3Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack3color.A, GlobalSettings.Default.Attack3color.R, GlobalSettings.Default.Attack3color.G, GlobalSettings.Default.Attack3color.B);
+            Attack4Hitfill.Color = Color.FromArgb(GlobalSettings.Default.Attack4color.A, GlobalSettings.Default.Attack4color.R, GlobalSettings.Default.Attack4color.G, GlobalSettings.Default.Attack4color.B);
 
             OwnLand = new SolidColorBrush(Color.FromRgb(90, 105, 236));
 
@@ -845,12 +846,17 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                             TextBlock tb3 = new TextBlock();
 
+                            TextBlock tb35 = new TextBlock();
+
                             TextBlock tb4 = new TextBlock();
 
 
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
-                            tb3.Text = $"with {Method}";
+                            tb3.Text = $"with ";
+                            tb35.Text = $"{Attack1_name}";
+
+                            tb35.Foreground = Attack1Hitfill;
 
                             Label toinsert = new Label();
                             if (Attacker == Selfuser)
@@ -870,6 +876,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb4.Inlines.Add(tb1);
                             tb4.Inlines.Add(tb2);
                             tb4.Inlines.Add(tb3);
+                            tb4.Inlines.Add(tb35);
                             tb4.TextWrapping = TextWrapping.Wrap;
 
                             curvedanimatev3(Attacker, city, attaknum, Method);
@@ -897,13 +904,17 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             TextBlock tb2 = new TextBlock();
 
                             TextBlock tb3 = new TextBlock();
+                            TextBlock tb35 = new TextBlock();
 
                             TextBlock tb4 = new TextBlock();
 
 
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
-                            tb3.Text = $"with {Method}";
+                            tb3.Text = $"with ";
+                            tb35.Text = $"{Attack2_name}";
+
+                            tb35.Foreground = Attack2Hitfill;
 
                             Label toinsert = new Label();
                             if (Attacker == Selfuser)
@@ -923,6 +934,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb4.Inlines.Add(tb1);
                             tb4.Inlines.Add(tb2);
                             tb4.Inlines.Add(tb3);
+                            tb4.Inlines.Add(tb35);
                             tb4.TextWrapping = TextWrapping.Wrap;
 
                             curvedanimatev3(Attacker, city, attaknum, Method);
@@ -949,13 +961,18 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             TextBlock tb2 = new TextBlock();
 
                             TextBlock tb3 = new TextBlock();
+                            TextBlock tb35 = new TextBlock();
 
                             TextBlock tb4 = new TextBlock();
 
 
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
-                            tb3.Text = $"with {Method}";
+                            tb3.Text = $"with ";
+                            tb35.Text = $"{Attack3_name}";
+
+                            tb35.Foreground = Attack3Hitfill;
+
 
                             Label toinsert = new Label();
                             if (Attacker == Selfuser)
@@ -975,6 +992,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb4.Inlines.Add(tb1);
                             tb4.Inlines.Add(tb2);
                             tb4.Inlines.Add(tb3);
+                            tb4.Inlines.Add(tb35);
                             tb4.TextWrapping = TextWrapping.Wrap;
 
                             curvedanimatev3(Attacker, city, attaknum, Method);
@@ -999,13 +1017,17 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             TextBlock tb2 = new TextBlock();
 
                             TextBlock tb3 = new TextBlock();
+                            TextBlock tb35 = new TextBlock();
 
                             TextBlock tb4 = new TextBlock();
 
 
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
-                            tb3.Text = $"with {Method}";
+                            tb3.Text = $"with ";
+                            tb35.Text = $"{Attack4_name}";
+
+                            tb35.Foreground = Attack4Hitfill;
 
                             Label toinsert = new Label();
                             if (Attacker == Selfuser)
@@ -1025,6 +1047,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb4.Inlines.Add(tb1);
                             tb4.Inlines.Add(tb2);
                             tb4.Inlines.Add(tb3);
+                            tb4.Inlines.Add(tb35);
                             tb4.TextWrapping = TextWrapping.Wrap;
 
                             curvedanimatev3(Attacker, city, attaknum, Method);
