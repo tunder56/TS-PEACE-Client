@@ -12,7 +12,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 
-
 namespace TS_PEACE_Client.Windows.Game_windows
 {
     /// <summary>
