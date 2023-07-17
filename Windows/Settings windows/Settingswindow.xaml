@@ -33,9 +33,9 @@
 
         <Button Content="Exit" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="8" Grid.Row="0" Width="80" Height="30" Click="Exit"/>
         <Button Content="Save and apply" Grid.Column="7" Grid.Row="6" VerticalAlignment="Bottom" Width="100" HorizontalAlignment="Center" Height="30" Click="Button_Click"/>
-        <Label Content="Settings"  VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontFamily="Avara" FontSize="40" Margin="0,26,0,0"/>
+        <Label Content="Settings"  VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontFamily="{StaticResource AVB}" FontSize="40" Margin="0,26,0,0"/>
         <!-- color chaging settings-->
-        <Label Content="Colors" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"  Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="20" FontFamily="AUTHENTIC Sans 90" />
+        <Label Content="Colors" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"  Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="20"  />
         
         <!--Grid to hold attck 1 color changing items-->
         <Grid x:Name="Attack1grid" Grid.Row="1" Grid.Column="1">
@@ -48,9 +48,9 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label Content="Attack 1" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <ComboBox Name="Attack1box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+            <Label Content="Attack 1" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <ComboBox Name="Attack1box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" >
 
             </ComboBox>
         </Grid>
@@ -68,9 +68,9 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label Content="Attack 2" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <ComboBox Name="Attack2box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+            <Label Content="Attack 2" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <ComboBox Name="Attack2box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" >
 
             </ComboBox>
         </Grid>
@@ -87,9 +87,9 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label Content="Attack 3" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <ComboBox Name="Attack3box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+            <Label Content="Attack 3" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <ComboBox Name="Attack3box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" >
 
             </ComboBox>
         </Grid>
@@ -106,16 +106,16 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label Content="Attack 4" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <ComboBox Name="Attack4box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" FontFamily="AUTHENTIC Sans 90">
+            <Label Content="Attack 4" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Color" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <ComboBox Name="Attack4box"  Grid.Column="1"  Grid.RowSpan="2" SelectionChanged="combobox_SelectionChanged" >
 
             </ComboBox>
         </Grid>
         <Rectangle x:Name="Attack4rec" Fill="Wheat" Grid.Column="7" Grid.Row="3"/>
         
         <!--Attack name section-->
-        <Label Content=" Attack Names" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="3" FontFamily="AUTHENTIC Sans 90" FontSize="20"/>
+        <Label Content=" Attack Names" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="3"  FontSize="20"/>
         
         <!--Gird to hold attack 1 name changing items-->
         <Grid x:Name="Attack1namegrid" Grid.Row="5" Grid.Column="1">
@@ -127,9 +127,9 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Content="Attack 1" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <TextBox Name="Attack1name" Grid.Row="0" Grid.Column="1" FontFamily="AUTHENTIC Sans 90" TextChanged="Attack1name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25" ></TextBox>
+            <Label Content="Attack 1" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <TextBox Name="Attack1name" Grid.Row="0" Grid.Column="1"  TextChanged="Attack1name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25" ></TextBox>
         </Grid>
 
         <!--Grid to hold attack 2 name changing items-->
@@ -142,9 +142,9 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Content="Attack 2" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <TextBox Name="Attack2name" Grid.Row="0" Grid.Column="1" FontFamily="AUTHENTIC Sans 90" TextChanged="Attack2name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
+            <Label Content="Attack 2" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <TextBox Name="Attack2name" Grid.Row="0" Grid.Column="1"  TextChanged="Attack2name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
         </Grid>
         
         <!--Grid to hold attack 3 name changing items-->
@@ -157,9 +157,9 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Content="Attack 3" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <TextBox Name="Attack3name" Grid.Row="0" Grid.Column="1" FontFamily="AUTHENTIC Sans 90" TextChanged="Attack3name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
+            <Label Content="Attack 3" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <TextBox Name="Attack3name" Grid.Row="0" Grid.Column="1"  TextChanged="Attack3name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
         </Grid>
         
         
@@ -173,9 +173,9 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Content="Attack 4" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29" FontFamily="AUTHENTIC Sans 90" ></Label>
-            <TextBox Name="Attack4name" Grid.Row="0" Grid.Column="1" FontFamily="AUTHENTIC Sans 90" TextChanged="Attack4name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
+            <Label Content="Attack 4" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <Label Content="Name" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="29"  ></Label>
+            <TextBox Name="Attack4name" Grid.Row="0" Grid.Column="1"  TextChanged="Attack4name_TextChanged" Grid.RowSpan="2" VerticalContentAlignment="Center" MaxLength="25"></TextBox>
         </Grid>
 
     </Grid>

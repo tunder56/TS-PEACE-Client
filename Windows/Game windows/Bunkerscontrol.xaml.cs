@@ -149,8 +149,10 @@ namespace TS_PEACE_Client.Windows.Game_windows
             {
 
                 TextBlock text = new TextBlock();
+                ResourceKey rk = new ComponentResourceKey(typeof(MainWindow), "AVB");
 
-                text.FontFamily = new FontFamily("Avara");
+                text.FontFamily = text.TryFindResource("AVB") as FontFamily;
+                
 
                 text.FontSize = 18;
 

@@ -29,4 +29,12 @@
     </None>
   </ItemGroup>
 
+	<ItemGroup>
+		<Resource Include="Fonts/Avara-Black.ttf"/>
+		<Resource Include="Fonts/AUTHENTICSans-90.otf"/>
+		<Resource Include="Fonts/AUTHENTICSans-60.otf"/>
+		
+		
+	</ItemGroup>
+
 </Project>

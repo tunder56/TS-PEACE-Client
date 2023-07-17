@@ -30,5 +30,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <FontFamily x:Key="AVB">pack://application:,,,/Fonts/#Avara Black</FontFamily>
+        <FontFamily x:Key="AS90">pack://application:,,,/Fonts/#Authentic Sans 90</FontFamily>
+        <FontFamily x:Key="AS60">pack://application:,,,/Fonts/#Authentic Sans 60</FontFamily>
     </Application.Resources>
 </Application>

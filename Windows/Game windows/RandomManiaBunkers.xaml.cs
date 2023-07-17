@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TS_PEACE_Client.Windows.Game_windows
 {
@@ -345,7 +346,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 {
                     TextBlock text = new TextBlock();
 
-                    text.FontFamily = new FontFamily("Avara");
+                    text.FontFamily = text.TryFindResource("AVB") as FontFamily;
                     text.FontSize = 18;
                     text.HorizontalAlignment = HorizontalAlignment.Center;
                     text.TextWrapping = TextWrapping.Wrap;
@@ -2567,7 +2568,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
                 text.Content = "Syncing map with server";
                 text.Foreground = Brushes.White;
-                text.FontFamily = new FontFamily("Avara");
+                text.FontFamily = text.TryFindResource("AVB") as FontFamily;
                 text.Name = "synclabel";
                 text.FontSize = 100;
                 text.HorizontalAlignment = HorizontalAlignment.Center;
@@ -2719,7 +2720,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 Label text = new Label();
                 text.Content = "Reconnecting to server";
                 text.Foreground = Brushes.White;
-                text.FontFamily = new FontFamily("Avara");
+                text.FontFamily = text.TryFindResource("AVB") as FontFamily;
                 text.Name = "synclabel";
                 text.FontSize = 100;
                 Grid.SetColumnSpan(text, 3);
@@ -2836,7 +2837,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 Label text = new Label();
                 text.Content = "Connecting to server";
                 text.Foreground = Brushes.White;
-                text.FontFamily = new FontFamily("Avara");
+                text.FontFamily = text.TryFindResource("AVB") as FontFamily;
                 text.Name = "synclabel";
                 text.FontSize = 100;
                 Grid.SetColumnSpan(text, 3);
@@ -2973,7 +2974,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 textBlock.Text = "retrying in " + recoontetingtime;
 
                 textBlock.Foreground = Brushes.White;
-                textBlock.FontFamily = new FontFamily("Avara");
+                textBlock.FontFamily = textBlock.TryFindResource("AVB") as FontFamily;
                 textBlock.FontSize = 50;
                 textBlock.HorizontalAlignment = HorizontalAlignment.Center;
                 textBlock.VerticalAlignment = VerticalAlignment.Bottom;
@@ -3033,7 +3034,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 Label text = new Label();
                 text.Content = "Awaiting second player";
                 text.Foreground = Brushes.White;
-                text.FontFamily = new FontFamily("Avara");
+                text.FontFamily = text.TryFindResource("AVB") as FontFamily;
                 text.Name = "synclabel";
                 text.FontSize = 100;
                 Grid.SetColumnSpan(text, 3);
