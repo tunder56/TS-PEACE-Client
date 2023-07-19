@@ -6,7 +6,12 @@
     <RootNamespace>TS_PEACE_Client</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>favicon (1).ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="favicon (1).ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
@@ -30,9 +35,9 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Resource Include="Fonts/Avara-Black.ttf"/>
-		<Resource Include="Fonts/AUTHENTICSans-90.otf"/>
-		<Resource Include="Fonts/AUTHENTICSans-60.otf"/>
+		<Resource Include="Fonts/Avara-Black.ttf" />
+		<Resource Include="Fonts/AUTHENTICSans-90.otf" />
+		<Resource Include="Fonts/AUTHENTICSans-60.otf" />
 		
 		
 	</ItemGroup>

@@ -759,7 +759,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Attack1_name}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack1_name.Text}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -790,7 +790,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Attack2_name}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack2_name.Text}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -821,7 +821,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Attack3_name}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack3_name.Text}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });
@@ -852,7 +852,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                         }
                         animateattack(Attacker, city, attaknum);
                         toinsert.TextWrapping = TextWrapping.Wrap;
-                        toinsert.Text = $"{Attacker} has hit {city} with {Attack4_name}";
+                        toinsert.Text = $"{Attacker} has hit {city} with {Attack4_name.Text}";
                         stikefeeddisplay_box.Items.Insert(0, toinsert);
                         attaknum++;
                     });

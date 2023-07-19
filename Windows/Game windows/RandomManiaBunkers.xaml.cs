@@ -77,7 +77,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
         // Create custom routed event
         public static readonly RoutedEvent Clickteam = EventManager.RegisterRoutedEvent(
-        name: "Click",
+        name: "Click2",
         routingStrategy: RoutingStrategy.Bubble,
         handlerType: typeof(RoutedEventHandler),
         ownerType: typeof(Button));
@@ -809,7 +809,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
                             tb3.Text = $"with ";
-                            tb35.Text = $"{Attack1_name}";
+                            tb35.Text = $"{Attack1_name.Text}";
 
                             tb35.Foreground = Attack1Hitfill;
 
@@ -867,7 +867,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
                             tb3.Text = $"with ";
-                            tb35.Text = $"{Attack2_name}";
+                            tb35.Text = $"{Attack2_name.Text}";
 
                             tb35.Foreground = Attack2Hitfill;
 
@@ -920,7 +920,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
                             tb3.Text = $"with ";
-                            tb35.Text = $"{Attack3_name}";
+                            tb35.Text = $"{Attack3_name.Text}";
 
                             tb35.Foreground = Attack3Hitfill;
 
@@ -976,7 +976,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
                             tb1.Text = $"{Attacker} Has Hit ";
                             tb2.Text = $"{city} ";
                             tb3.Text = $"with ";
-                            tb35.Text = $"{Attack4_name}";
+                            tb35.Text = $"{Attack4_name.Text}";
 
                             tb35.Foreground = Attack4Hitfill;
 
@@ -1467,8 +1467,28 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 TextBlock tb2 = new TextBlock();
 
                 TextBlock tb3 = new TextBlock();
+                TextBlock tb35 = new TextBlock();
 
                 TextBlock tb4 = new TextBlock();
+
+                string methodtext;
+
+                if(Method =="attack1")
+                {
+                    tb35.Text = Attack1_name.Text;
+                }
+                else if (Method == "attack2")
+                {
+                    tb35.Text = Attack2_name.Text;
+                }
+                else if (Method == "attack3")
+                {
+                    tb35.Text = Attack3_name.Text;
+                }
+                else if (Method == "attack4")
+                {
+                    tb35.Text = Attack4_name.Text;
+                }
 
                 tb1.Text = $"{attacker} Has Hit ";
                 tb2.Text = $"{hitcityin} ";
