@@ -165,7 +165,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
 
             // connect to Signal R hub
             connection = new HubConnectionBuilder()
-                .WithUrl(url: "https://21ftszzr-7190.aue.devtunnels.ms/Bunkershub")
+                .WithUrl(url: "https://serverv2playnice20220123124825.azurewebsites.net/Bunkershub")
                 .WithAutomaticReconnect()
                 .Build();
 
