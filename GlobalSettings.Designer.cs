@@ -109,7 +109,7 @@ namespace TS_PEACE_Client {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Attack 1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Air Strike")]
         public string Attack1name {
             get {
                 return ((string)(this["Attack1name"]));
@@ -121,7 +121,7 @@ namespace TS_PEACE_Client {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Attack 2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ground Troops")]
         public string Attack2name {
             get {
                 return ((string)(this["Attack2name"]));
@@ -133,7 +133,7 @@ namespace TS_PEACE_Client {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Attack 3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Bombing Run")]
         public string Attack3name {
             get {
                 return ((string)(this["Attack3name"]));
@@ -145,7 +145,7 @@ namespace TS_PEACE_Client {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Attack 4")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Nuclear Warhead")]
         public string Attack4name {
             get {
                 return ((string)(this["Attack4name"]));

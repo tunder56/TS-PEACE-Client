@@ -180,8 +180,8 @@
                 <ListBox x:Name="messagedisplay_box" HorizontalContentAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="{StaticResource AS90}" Margin="0,73,0,0" Grid.RowSpan="2" >
                    
                 </ListBox>
-                <Button Name="lastbutton" Content="Last"  HorizontalAlignment="Left" Height="78" Margin="163,3,0,0" VerticalAlignment="Top" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>
-                <Button x:Name="nextbutton" Content="Next"  HorizontalAlignment="Left" Height="78" Margin="328,4,0,0" VerticalAlignment="Top" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>
+                <Button Name="lastbutton" Content="Last"  HorizontalAlignment="Left" Height="78"  VerticalAlignment="Center" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>
+                <Button x:Name="nextbutton" Content="Next"  HorizontalAlignment="Right" Height="78" VerticalAlignment="Center" Width="134" FontSize="35" Grid.Row="2" Click="Button_Click"/>
 
 
 

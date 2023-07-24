@@ -24,16 +24,16 @@
       <Value Profile="(Default)">213, 213, 213</Value>
     </Setting>
     <Setting Name="Attack1name" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Attack 1</Value>
+      <Value Profile="(Default)">Air Strike</Value>
     </Setting>
     <Setting Name="Attack2name" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Attack 2</Value>
+      <Value Profile="(Default)">Ground Troops</Value>
     </Setting>
     <Setting Name="Attack3name" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Attack 3</Value>
+      <Value Profile="(Default)">Bombing Run</Value>
     </Setting>
     <Setting Name="Attack4name" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Attack 4</Value>
+      <Value Profile="(Default)">Nuclear Warhead</Value>
     </Setting>
   </Settings>
 </SettingsFile>

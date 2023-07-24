@@ -122,8 +122,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
 
                 messegeout.Text = $" To the left of here is the map" +
                 $" you can see that your land mass is coloured in blue" +
-                $" and you enemys in red" +
-                $" Try clicking on one of your enemys cites, they are the Black dots within the red landmass";
+                $" and you enemies in red" +
+                $" Try clicking on one of your enemies cites, they are the Black dots within the red landmass";
                 messagedisplay_box.Items.Insert(0, messegeout);
 
             });
@@ -164,7 +164,8 @@ namespace TS_PEACE_Client.Windows.Tutorial_windows
                 targetingrec.Opacity = 0;
 
                 messegeout.Text = $" Good job!" +
-                $"  Now you know how to target an ememy city";
+                $"  Now you know how to target an ememy city" +
+                $" Hit finish to continue";
                 messagedisplay_box.Items.Insert(0, messegeout);
 
             });

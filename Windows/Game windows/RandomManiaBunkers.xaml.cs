@@ -1523,7 +1523,8 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 tb4.TextWrapping = TextWrapping.Wrap;
                 tb4.FontSize = 20;
 
-                stikefeeddisplay_box.Items.Add(tb4);
+                stikefeeddisplay_box.Items.Insert(0,tb4);
+                
 
                 if (Method == "attack1")
                 {
@@ -2162,6 +2163,13 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 char[] finalname = new char[namegen.Length];
 
                 int i = 0;
+                foreach (var h in hex)
+                {
+                    if (namegen == h.Name)
+                    {
+                        goto dovover;
+                    }
+                }
 
                 foreach (char letter in namegen2)
                 {
@@ -2203,11 +2211,19 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 var randomip = new PlaceNameGenerator();
 
                 string namegen = randomip.GenerateRandomPlaceName();
-
+                
                 char[] namegen2 = namegen.ToCharArray();
                 char[] alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
                 int i = 0;
+
+                foreach(var h in hex)
+                {
+                    if(namegen == h.Name)
+                    {
+                        goto dovover2;
+                    }
+                }
 
                 foreach (char letter in namegen2)
                 {
