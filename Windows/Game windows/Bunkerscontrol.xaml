@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStyle="None"
-        Title="Bunkerscontrol" Height="1080" Width="1920"
+        Title="Normal P.E.A.C.E" Height="1080" Width="1920"
         ResizeMode="NoResize">
 
     <Grid x:Name="main_grid" Background="#FF373737">
@@ -174,7 +174,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="0.25*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="exit" Content="EXIT" FontSize="40" Margin="0,0,0,0" Grid.Column="1" Grid.Row="0" Panel.ZIndex="3" FontFamily="{StaticResource AVB}" Click="exit_Click"></Button>
+            
             <Rectangle x:Name="message_box" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3"  Stroke="Black"></Rectangle>
 
             <Label Name="message_title" Content="Messages" HorizontalContentAlignment="Center" FontSize="36" Foreground="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5" FontWeight="Bold" FontFamily="{StaticResource AVB}" />
@@ -187,7 +187,7 @@
 
 
         </Grid>
-        
+        <Button x:Name="exit" Content="EXIT" Width="100" Height="70" VerticalAlignment="top" FontSize="30" HorizontalAlignment="Right"  Margin="0,0,0,0" Grid.Column="2" Panel.ZIndex="3" FontFamily="{StaticResource AVB}" Click="exit_Click"></Button>
         <!--Grid to hold Strike Feed and elements-->
         <Grid x:Name="strikefeed_grid" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
             <Grid.RowDefinitions>

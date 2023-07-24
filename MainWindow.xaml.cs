@@ -40,6 +40,7 @@ namespace TS_PEACE_Client
             Thread newWindowThread = new Thread(new ThreadStart(l.ThreadStartingPoint));
             newWindowThread.SetApartmentState(ApartmentState.STA);
             newWindowThread.IsBackground = true;
+            newWindowThread.Name = "Loding thread";
             newWindowThread.Start();
 
             RandomManiaBunkers win = new RandomManiaBunkers();

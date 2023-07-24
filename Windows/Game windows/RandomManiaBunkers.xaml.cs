@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using RandomNameGeneratorLibrary;
+using Microsoft.Diagnostics.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -159,7 +160,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
             Attack4_name.Text = GlobalSettings.Default.Attack4name;
 
 
-
+            
 
 
 
@@ -219,7 +220,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
         public async Task Reboottimer()
         {
             // create timer, if timer runs out, and booted = false, reboot
-            TimeSpan boottimer = new TimeSpan(0, 0, 0, 30);
+            TimeSpan boottimer = new TimeSpan(0, 0, 0, 5);
             while (boottimer.TotalSeconds > 0)
             {
                 boottimer = boottimer.Subtract(new TimeSpan(0, 0, 0, 1));
@@ -230,16 +231,22 @@ namespace TS_PEACE_Client.Windows.Game_windows
                 var s = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 string strWorkPath = System.IO.Path.GetDirectoryName(s);
                 string strSettingsXmlFilePath = System.IO.Path.Combine(strWorkPath, "TS-PEACE-Client.exe");
-                System.Diagnostics.Process.Start(strSettingsXmlFilePath);
+                
                 string messageBoxText = "Generating map took too long, Rebooting";
                 string caption = "TS P.E.A.C.E CLient error";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result;
 
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                Environment.Exit(1003);
-                return;
+              
+                
+                if (MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly) == MessageBoxResult.OK)
+                {
+                    System.Diagnostics.Process.Start(strSettingsXmlFilePath);
+                    Environment.Exit(1003);
+                    return;
+                }
+                
             }
         }
 
@@ -2718,9 +2725,12 @@ namespace TS_PEACE_Client.Windows.Game_windows
         private void Exitbutton_Click(object sender, RoutedEventArgs e)
         {
             // exit button click
-            MainWindow win = new MainWindow();
-            win.Show();
-            this.Close();
+            var s = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string strWorkPath = System.IO.Path.GetDirectoryName(s);
+            string strSettingsXmlFilePath = System.IO.Path.Combine(strWorkPath, "TS-PEACE-Client.exe");
+            System.Diagnostics.Process.Start(strSettingsXmlFilePath);
+            Environment.Exit(1);
+            
         }
 
         public void reconnect()

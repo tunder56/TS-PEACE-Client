@@ -107,7 +107,7 @@ namespace TS_PEACE_Client.Windows.Game_windows
             connection.HandshakeTimeout = TimeSpan.FromSeconds(10);
             connection.On<string, string>(methodName: "reciveMessage", (user, message) => reciveMessage(user, message));
             connection.On<List<string>, string, string>(methodName: "incommingattack", (incomAttack, Attacker, Method) => incommingattack(incomAttack, Attacker, Method));
-            connection.StartAsync();
+            connectionsolidify();
 
         }
 
@@ -1230,9 +1230,201 @@ namespace TS_PEACE_Client.Windows.Game_windows
         private void exit_Click(object sender, RoutedEventArgs e)
         {
             // on click exit
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            var s = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string strWorkPath = System.IO.Path.GetDirectoryName(s);
+            string strSettingsXmlFilePath = System.IO.Path.Combine(strWorkPath, "TS-PEACE-Client.exe");
+            System.Diagnostics.Process.Start(strSettingsXmlFilePath);
+            Environment.Exit(1);
+        }
+
+        public async void connectionsolidify()
+        {
+            // solidify connection, handle cannot connect and waiting for other players
+            this.Dispatcher.Invoke(() =>
+            {
+                Rectangle scrim = new Rectangle();
+
+                scrim.Fill = Brushes.Black;
+                scrim.Opacity = 0.8;
+                scrim.Name = "scrim";
+                Grid.SetColumnSpan(scrim, 3);
+                Grid.SetRowSpan(scrim, 4);
+                Panel.SetZIndex(scrim, 40);
+
+                Label text = new Label();
+                text.Content = "Connecting to server";
+                text.Foreground = Brushes.White;
+                text.FontFamily = text.TryFindResource("AVB") as FontFamily;
+                text.Name = "synclabel";
+                text.FontSize = 100;
+                Grid.SetColumnSpan(text, 3);
+                Grid.SetRow(text, 0);
+                Grid.SetZIndex(text, 41);
+                text.HorizontalAlignment = HorizontalAlignment.Center;
+                text.VerticalAlignment = VerticalAlignment.Bottom;
+
+
+                Ellipse ellipse1 = new Ellipse();
+                ellipse1.Fill = Brushes.White;
+                ellipse1.Width = 40;
+                ellipse1.Height = 40;
+                ellipse1.Opacity = 1;
+                Panel.SetZIndex(ellipse1, 45);
+                Grid.SetRow(ellipse1, 1);
+                Grid.SetColumn(ellipse1, 1);
+
+                Ellipse ellipse2 = new Ellipse();
+                ellipse2.Fill = Brushes.White;
+                ellipse2.Width = 40;
+                ellipse2.Height = 40;
+                ellipse2.Opacity = 1;
+                ellipse2.Margin = new Thickness(193, 70, 400, 70);
+                Panel.SetZIndex(ellipse2, 45);
+                Grid.SetRow(ellipse2, 1);
+                Grid.SetColumn(ellipse2, 1);
+
+                Ellipse ellipse3 = new Ellipse();
+                ellipse3.Fill = Brushes.White;
+                ellipse3.Width = 40;
+                ellipse3.Height = 40;
+                ellipse3.Opacity = 1;
+                ellipse3.Margin = new Thickness(400, 70, 200, 70);
+                Panel.SetZIndex(ellipse3, 45);
+                Grid.SetRow(ellipse3, 1);
+                Grid.SetColumn(ellipse3, 1);
+
+                DoubleAnimation da1 = new DoubleAnimation();
+                da1.From = -1;
+                da1.To = 1;
+                da1.BeginTime = TimeSpan.FromSeconds(1);
+                da1.Duration = TimeSpan.FromSeconds(2);
+                da1.RepeatBehavior = RepeatBehavior.Forever;
+                da1.AutoReverse = true;
+
+
+                DoubleAnimation da2 = new DoubleAnimation();
+                da2.From = -1;
+                da2.To = 1;
+                da2.BeginTime = TimeSpan.FromSeconds(0);
+                da2.Duration = TimeSpan.FromSeconds(2);
+                da2.RepeatBehavior = RepeatBehavior.Forever;
+                da2.AutoReverse = true;
+
+                DoubleAnimation da3 = new DoubleAnimation();
+                da3.From = -1;
+                da3.To = 1;
+                da3.BeginTime = TimeSpan.FromSeconds(2);
+                da3.Duration = TimeSpan.FromSeconds(2);
+                da3.RepeatBehavior = RepeatBehavior.Forever;
+                da3.AutoReverse = true;
+
+                Storyboard sb1 = new Storyboard();
+
+
+                Storyboard.SetTarget(da1, ellipse1);
+                Storyboard.SetTargetProperty(da1, new PropertyPath(Ellipse.OpacityProperty));
+
+
+                Storyboard.SetTarget(da2, ellipse2);
+                Storyboard.SetTargetProperty(da2, new PropertyPath(Ellipse.OpacityProperty));
+
+
+                Storyboard.SetTarget(da3, ellipse3);
+                Storyboard.SetTargetProperty(da3, new PropertyPath(Ellipse.OpacityProperty));
+
+                sb1.Children.Add(da1);
+                sb1.Children.Add(da2);
+                sb1.Children.Add(da3);
+
+
+                RegisterName("scrim1", scrim);
+                RegisterName("Reconnectinglabel1", text);
+                RegisterName("Ellipse11", ellipse1);
+                RegisterName("Ellipse21", ellipse2);
+                RegisterName("Ellipse31", ellipse3);
+
+
+                main_grid.Children.Add(scrim);
+                main_grid.Children.Add(ellipse1);
+                main_grid.Children.Add(ellipse2);
+                main_grid.Children.Add(ellipse3);
+                main_grid.Children.Add(text);
+
+                sb1.Begin();
+
+            });
+
+            try
+            {
+                await connection.StartAsync();
+                Console.WriteLine("connected");
+                main_grid.Children.Remove(main_grid.FindName("Ellipse11") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse21") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse31") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("scrim1") as Rectangle);
+                main_grid.Children.Remove(main_grid.FindName("Reconnectinglabel1") as Label);
+                UnregisterName("scrim1");
+                UnregisterName("Reconnectinglabel1");
+                UnregisterName("Ellipse11");
+                UnregisterName("Ellipse21");
+                UnregisterName("Ellipse31");
+                await connection.InvokeAsync(methodName: "UserCheck");
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                main_grid.Children.Remove(main_grid.FindName("Ellipse11") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse21") as Ellipse);
+                main_grid.Children.Remove(main_grid.FindName("Ellipse31") as Ellipse);
+                var exibutton = (main_grid.FindName("exit") as Button);
+                Grid.SetZIndex(exibutton, 50);
+                var title = main_grid.FindName("Reconnectinglabel1") as Label;
+
+                title.Content = "Connection failed";
+
+                TimeSpan recoontetingtime = TimeSpan.FromSeconds(30);
+
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = "retrying in " + recoontetingtime;
+
+                textBlock.Foreground = Brushes.White;
+                textBlock.FontFamily = textBlock.TryFindResource("AVB") as FontFamily;
+                textBlock.FontSize = 50;
+                textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                textBlock.VerticalAlignment = VerticalAlignment.Bottom;
+                textBlock.Margin = new Thickness(0, 0, 0, 100);
+                textBlock.Name = "reconnectingtextblock";
+                Grid.SetColumnSpan(textBlock, 3);
+                Grid.SetRow(textBlock, 1);
+                Grid.SetZIndex(textBlock, 41);
+
+                main_grid.Children.Add(textBlock);
+
+                while (recoontetingtime > TimeSpan.Zero)
+                {
+                    await Task.Delay(1000);
+                    recoontetingtime = recoontetingtime.Subtract(TimeSpan.FromSeconds(1));
+                    textBlock.Text = "retrying in " + recoontetingtime;
+                }
+                main_grid.Children.Remove(textBlock);
+                main_grid.Children.Remove(main_grid.FindName("scrim1") as Rectangle);
+                main_grid.Children.Remove(main_grid.FindName("Reconnectinglabel1") as Label);
+
+
+                UnregisterName("scrim1");
+                UnregisterName("Reconnectinglabel1");
+                UnregisterName("Ellipse11");
+                UnregisterName("Ellipse21");
+                UnregisterName("Ellipse31");
+
+                connectionsolidify();
+
+            }
+
+
         }
     }
 }

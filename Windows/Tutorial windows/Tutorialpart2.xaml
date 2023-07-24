@@ -8,7 +8,7 @@
         WindowState="Maximized"
         WindowStyle="None"
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Tutorialpart2">
+      Title="Tutorial part 2">
 
     <Grid>
 

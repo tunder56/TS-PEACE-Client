@@ -7,7 +7,7 @@
          mc:Ignorable="d"
         WindowState="Maximized"
         WindowStyle="None"
-        Title="RandomManiaBunkers" Height="1080" Width="1920"
+        Title="Random P.E.A.C.E" Height="1080" Width="1920"
         
         ResizeMode="CanMinimize">
     <Grid x:Name="main_grid" Background="#FF373737">
